@@ -17,6 +17,8 @@ keyboard := keyboard_(AHI)
 
 var := variables_()
 
+Sleep 100
+
 #include gui.ahk
 Persistent
 
