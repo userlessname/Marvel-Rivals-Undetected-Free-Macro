@@ -2,6 +2,21 @@
 #SingleInstance Force
 #include Libs\AutoHotInterception\AHK v2\Lib\AutoHotInterception.ahk
 #include mouse_keyboard_variables.ahk
+
+AHI := AutoHotInterception()
+
+; keyboard := keyboard_(AHI, "HID\VID_1C4F&PID_0002&REV_0330&MI_00")
+
+; mouse := mouse_(AHI, "HID\VID_09DA&PID_57EB&REV_0028&MI_01")
+
+; keyboard := keyboard_(AHI, "HID\VID_0951&PID_16DD&REV_2111&MI_00")
+
+mouse := mouse_(AHI)
+
+keyboard := keyboard_(AHI)
+
+var := variables_()
+
 #include gui.ahk
 Persistent
 
@@ -11,50 +26,16 @@ CoordMode "Mouse", "Screen"
 ; Optimize script performance
 SetWinDelay -1
 
-AHI := AutoHotInterception()
-
-; keyboard := keyboard_(AHI, "HID\VID_1C4F&PID_0002&REV_0330&MI_00")
-mouse := mouse_(AHI, "HID\VID_09DA&PID_57EB&REV_0028&MI_01")
-keyboard := keyboard_(AHI, "HID\VID_0951&PID_16DD&REV_2111&MI_00")
-; mouse := mouse_(AHI)
-; keyboard := keyboard_(AHI)
-var := variables_()
-
 ; Subscribe to mouse and keyboard events
 AHI.SubscribeMouseButton(mouse.id, var.mouse_left_code, false, LeftClick)
 
 AHI.SubscribeKey(keyboard.id, GetKeySC("LCtrl"), false, LCtrl)
 AHI.SubscribeKey(keyboard.id, GetKeySC("LAlt"), false, LAlt)
 AHI.SubscribeKey(keyboard.id, GetKeySC("F9"), false, F9)
-; AHI.SubscribeKey(keyboard.id, GetKeySC("``"), false, BackTick)
 
+AHI.SubscribeKey(keyboard.id, GetKeySC("1"), false, One)
 AHI.SubscribeKey(keyboard.id, GetKeySC("F1"), false, F1)
 AHI.SubscribeKey(keyboard.id, GetKeySC("F2"), false, F2)
-
-F1(state){
-    if state
-        return
-    if var.LAlt_state
-        send_key("F11")
-    if var.LCtrl_state
-        active_deactive()
-
-}
-
-F2(state){
-    if state
-        return
-    if var.LAlt_state
-        send_key("F12")
-}
-
-; --- Initialize global states ---
-; These are now managed by gui.ahk
-; global var.mouse_left_state := false
-; global var.LCtrl_state := false
-; global var.LAlt_state := false
-; global var.BackTick_state := false
-; global var.BackTick_toggle := false
 
 ; --- Mouse Event Handlers ---
 LeftClick(state){
@@ -65,8 +46,31 @@ LeftClick(state){
         tooltip_center(A_Clipboard, 1000)
     }
 }
-
 ; --- Keyboard Event Handlers ---
+One(state){
+    if (state && !var.One_state)
+    {
+        var.One_state := true
+        if var.LCtrl_state
+            active_deactive()
+    }
+    else if (!state && var.One_state)
+    {
+        var.One_state := false
+    }
+}
+F1(state){
+    if state
+        return
+    if var.LAlt_state
+        send_key("F11")
+}
+F2(state){
+    if state
+        return
+    if var.LAlt_state
+        send_key("F12")
+}
 LCtrl(state){  
     if (state && !var.LCtrl_state)
     {
@@ -77,7 +81,6 @@ LCtrl(state){
         var.LCtrl_state := false
     }
 }
-
 LAlt(state){
     if (state && !var.LAlt_state)
     {
@@ -88,27 +91,23 @@ LAlt(state){
         var.LAlt_state := false
     }
 }
-
-BackTick(state){
-    if (state && !var.BackTick_state)
-    {
-        var.BackTick_state := true
-        ; BackTick_()
-    }
-    else if (!state && var.BackTick_state)
-    {
-        var.BackTick_state := false
-    }
-}
-
+; --- Active/Deactive ---
 active_deactive(){
     var.active_deactive_toggle := !var.active_deactive_toggle
+    ; ToolTip ("active_deactive_toggle  " . var.active_deactive_toggle)
     if var.active_deactive_toggle
-        tooltip_center("++++++++++", 1000)
+    {
+        tooltip_center(" +++ (1/3) ", 333)
+        tooltip_center(" ++++++ (2/3) ", 333)
+        tooltip_center(" +++++++++ (3/3) ", 333)
+    }    
     else
-        tooltip_center("----------", 1000)
+    {
+        tooltip_center(" --- (1/3) ", 333)
+        tooltip_center(" ------ (2/3) ", 333)
+        tooltip_center(" --------- (3/3) ", 333)
+    }
 }
-
 ; --- Capture --- 
 F9(state) {
     if state
@@ -131,12 +130,11 @@ F9(state) {
     ; adam_warlock.capture()
     ; jeff_the_land_shark.capture()
 }
-
 ; --- Main Loop ---
 while true {
     Sleep 256
-    ; if not var.BackTick_toggle
-    ;     continue
+    if not var.active_deactive_toggle
+        continue
 
     ; Hulk
     if (functionStates.Has("Hulk") && functionStates["Hulk"].Has(hulk_indestructible_guard) && functionStates["Hulk"][hulk_indestructible_guard]) {
@@ -780,7 +778,6 @@ tooltip_center(text, sleep_time := 400) {
         Tooltip()
     }
 }
-
 isImage_there(x1, y1, x2, y2, path, n_variation := -1) {
     ; n_variation 0 to 255
     ImagePath := A_ScriptDir . path
@@ -799,7 +796,6 @@ isImage_there(x1, y1, x2, y2, path, n_variation := -1) {
     ; Return the result as an object
     return {result: result, FoundX: FoundX, FoundY: FoundY}
 }
-
 CaptureScreenRegion(x1, y1, x2, y2, outputPath) {
     ; Calculate the width and height of the region
     outputFile := A_ScriptDir . outputPath
@@ -811,7 +807,6 @@ CaptureScreenRegion(x1, y1, x2, y2, outputPath) {
     RunWait(command)
     tooltip_center(outputPath, 1000)
 }
-
 send_key(key, isMouse := false) {
     if not isMouse
     {

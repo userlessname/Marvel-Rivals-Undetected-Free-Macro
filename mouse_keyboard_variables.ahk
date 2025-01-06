@@ -16,7 +16,9 @@ class mouse_ {
         if (handle == "")
         {
             this.subs()
+            ; Sleep 200
             this.MouseMoveWaitToContinue()
+            ; Sleep 200
         }
         else
         {
@@ -57,7 +59,7 @@ class mouse_ {
     }
     MouseMoveWaitToContinue(){
         ; Fareyi ekran koordinatlarına göre takip edeceğiz
-         CoordMode("Mouse", "Screen")
+        CoordMode("Mouse", "Screen")
      
         ;  helper_.tooltip_center("Please move your mouse to set", -1)
      
@@ -65,15 +67,15 @@ class mouse_ {
         MouseGetPos(&oldX, &oldY)
 
         ; Fare konumu değişene kadar bekle
+        helper_.tooltip_center("Please move your mouse", -1)
         While True {
-            Sleep 50 ; CPU kullanımını aşırı yükseltmemek için kısa bir bekleme ekliyoruz
+            Sleep 10 ; CPU kullanımını aşırı yükseltmemek için kısa bir bekleme ekliyoruz
             MouseGetPos(&x, &y)
             if (x != oldX || y != oldY) {
                 Break
             }
         } 
         ;  helper_.tooltip_center("Mouse SET", 1000)
-        Sleep 200
     }
 }
 ; --- Class Keyboard ---
@@ -90,7 +92,9 @@ class keyboard_ {
         if (handle == "")
         {
             this.subs()
+            ; Sleep 200
             this.KeyWaitAnyToContinue()
+            ; Sleep 200
         }
         else
         {
@@ -132,12 +136,13 @@ class keyboard_ {
         ih.Start()
         ih.Wait()
         ih.Stop()
-        Sleep 200
     }
 }
 
 ; --- Constans ---
 class variables_ {
+    One_state := false
+
     mouse_left_state := false
     LCtrl_state := false
     LAlt_state := false
