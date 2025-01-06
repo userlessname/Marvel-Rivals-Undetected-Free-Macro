@@ -77,7 +77,7 @@ class mouse_ {
         } 
         ;  helper_.tooltip_center("Mouse SET", 1000)
     }
-}
+} 
 ; --- Class Keyboard ---
 class keyboard_ {
     AHI := ""
