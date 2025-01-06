@@ -143,6 +143,7 @@ class variables_ {
     LAlt_state := false
     BackTick_state := false
     BackTick_toggle := false
+    active_deactive_toggle := true
 
     set(name, value){
         Switch name {

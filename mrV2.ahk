@@ -26,7 +26,7 @@ AHI.SubscribeMouseButton(mouse.id, var.mouse_left_code, false, LeftClick)
 AHI.SubscribeKey(keyboard.id, GetKeySC("LCtrl"), false, LCtrl)
 AHI.SubscribeKey(keyboard.id, GetKeySC("LAlt"), false, LAlt)
 AHI.SubscribeKey(keyboard.id, GetKeySC("F9"), false, F9)
-AHI.SubscribeKey(keyboard.id, GetKeySC("``"), false, BackTick)
+; AHI.SubscribeKey(keyboard.id, GetKeySC("``"), false, BackTick)
 
 AHI.SubscribeKey(keyboard.id, GetKeySC("F1"), false, F1)
 AHI.SubscribeKey(keyboard.id, GetKeySC("F2"), false, F2)
@@ -36,6 +36,9 @@ F1(state){
         return
     if var.LAlt_state
         send_key("F11")
+    if var.LCtrl_state
+        active_deactive()
+
 }
 
 F2(state){
@@ -90,7 +93,7 @@ BackTick(state){
     if (state && !var.BackTick_state)
     {
         var.BackTick_state := true
-        BackTick_()
+        ; BackTick_()
     }
     else if (!state && var.BackTick_state)
     {
@@ -98,9 +101,9 @@ BackTick(state){
     }
 }
 
-BackTick_(){
-    var.BackTick_toggle := !var.BackTick_toggle
-    if var.BackTick_toggle
+active_deactive(){
+    var.active_deactive_toggle := !var.active_deactive_toggle
+    if var.active_deactive_toggle
         tooltip_center("++++++++++", 1000)
     else
         tooltip_center("----------", 1000)
