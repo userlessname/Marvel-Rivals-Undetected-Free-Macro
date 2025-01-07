@@ -1,8 +1,13 @@
 #Requires AutoHotkey v2.0+
 #SingleInstance Force
-#include Libs\AutoHotInterception\AHK v2\Lib\AutoHotInterception.ahk
-#include mouse_keyboard_variables.ahk
 
+; Include necessary libraries
+#Include Lib\AutoHotInterception.ahk
+#Include mouse_keyboard_variables.ahk
+
+; ================================================================================
+; ================================================================================
+; ================================================================================
 AHI := AutoHotInterception()
 
 ; keyboard := keyboard_(AHI, "HID\VID_1C4F&PID_0002&REV_0330&MI_00")
