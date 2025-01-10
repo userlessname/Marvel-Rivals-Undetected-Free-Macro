@@ -1,5 +1,5 @@
 #Requires AutoHotkey v2.0
-myGui := gui_()   ; Sınıf örneği oluştur
+; myGui := gui_()   ; Sınıf örneği oluştur
 
 class gui_ {
     ; ------------------------------------------------------------
@@ -306,24 +306,22 @@ class gui_ {
     ; 6) CHECKBOX, EDIT, SLIDER EVENT HANDLER METOTLARI
     ; ------------------------------------------------------------
     HandleCheckboxClick(sectionName, funcName, checkCtrl) {
-        ; ToolTip(sectionName . "  " . funcName)
         if !this.functionStates.Has(sectionName)
             this.functionStates[sectionName] := Map()
-
-        ; Checkbox işaretli/boş
-        ; ToolTip(funcName . "")
-        this.functionStates[sectionName][funcName] := checkCtrl.Value
-
-        ; CheckBox işaretlendiyse diğer karakterlerde aynı isimli fonksiyon işaretini kapat
+    
+        this.functionStates[sectionName][funcName] := checkCtrl.Value  ; true/false
+    
+        ; Eğer checkbox işaretlendiyse, diğer tüm section’ların checkbox’larını kapat
         if (checkCtrl.Value) {
-            this.UncheckOtherSections(sectionName, funcName)
+            this.UncheckOtherSectionsExcept(sectionName)
         }
-
+    
         ; Magneto + Metallic Curtain => Edit kutusunu enable/disable
-        if (sectionName = "Magneto" && funcName = "Metallic Curtain") {
+        if (sectionName == "Magneto" && funcName == "Metallic Curtain") {
             this.EnableDisableMagnetoEdit(checkCtrl.Value)
         }
     }
+    
 
     EnableDisableMagnetoEdit(checked) {
         for group, sections in this.groupSections {
@@ -346,18 +344,29 @@ class gui_ {
         }
     }
 
-    UncheckOtherSections(currentSectionName, currentFuncName) {
+    UncheckOtherSectionsExcept(currentSectionName) {
         for group, sections in this.groupSections {
             for sectionArr in sections {
-                local cName   := sectionArr[1]
+                local cName    := sectionArr[1]
                 local controls := sectionArr[3]
-
+    
+                ; Sadece farklı karakter/seksiyonda ise
                 if (cName != currentSectionName) {
+                    ; 1) Kontroller arasındaki bütün checkbox’ları kapat
                     for ctrl in controls {
-                        if (ctrl.Type = "CheckBox" && ctrl.Text = currentFuncName) {
+                        if (ctrl.Type == "CheckBox") {
                             ctrl.Value := false
-                            if (this.functionStates.Has(cName) && this.functionStates[cName].Has(currentFuncName)) {
-                                this.functionStates[cName][currentFuncName] := false
+                        }
+                    }
+                    
+                    ; 2) Bellekte tuttuğumuz functionStates içindeki ilgili değerleri de false yap
+                    if (this.functionStates.Has(cName)) {
+                        for funcKey, funcVal in this.functionStates[cName] {
+                            ; Örneğin "slider" ya da "Metallic Curtain_AddOrMinus" gibi 
+                            ; numeric/string değerleri ellememek isteyebiliriz.
+                            ; Sadece true/false olan "checkbox" fonksiyonlarını kapatalım:
+                            if (funcVal = true || funcVal = false) {
+                                this.functionStates[cName][funcKey] := false
                             }
                         }
                     }
@@ -365,6 +374,7 @@ class gui_ {
             }
         }
     }
+    
 
     HandleShield2InputChange(sectionName, inputCtrl) {
         local inputValue := inputCtrl.Value

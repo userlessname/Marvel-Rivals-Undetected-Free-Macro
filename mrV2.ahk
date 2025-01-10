@@ -293,7 +293,7 @@ class hp{
         hpValue := this.getSliderHp(charName, AddOrMinus)
         ; tooltip_center(charName . AddOrMinus)
         hpValueNumber := myGui.getSliderHpNumber(charName)
-        ; tooltip_center(charName . ": " . hpValue)
+        tooltip_center(charName . ": " . hpValue)
         if (hpValue == "invalid")
         {
             tooltip_center("invalid")
