@@ -1,5 +1,5 @@
 #Requires AutoHotkey v2.0
-; myGui := gui_()   ; Sınıf örneği oluştur
+myGui := gui_()   ; Sınıf örneği oluştur
 
 class gui_ {
     ; ------------------------------------------------------------
@@ -17,7 +17,7 @@ class gui_ {
     sliderSpacing   := 35
 
     defaultShield2Value := "-40"
-    currentGuiHeight    := 720
+    currentGuiHeight    := 500
 
     ; Bölüm durumları ve fonksiyon durumlarını tutacak Map() yapıları
     sectionStates  := Map()  ; sectionStates[charName] -> true/false
@@ -244,7 +244,7 @@ class gui_ {
 
             ; Toggle buton konumu
             toggleBtn.Move(xPos, yPos, this.sectionW - 20, this.buttonHeight)
-            yPos += (this.buttonHeight + 5)
+            yPos += (this.buttonHeight + 15)
 
             ; Eğer açılmışsa (expanded) kontrolleri sırayla yerleştir
             if (isExpanded) {
@@ -292,14 +292,14 @@ class gui_ {
     }
 
     CollapseAllSectionsExcept(exceptCharName) {
-        ; for group, sections in this.groupSections {
-        ;     for sectionArr in sections {
-        ;         local cName := sectionArr[1]
-        ;         if (cName != exceptCharName) {
-        ;             this.sectionStates[cName] := false
-        ;         }
-        ;     }
-        ; }
+        for group, sections in this.groupSections {
+            for sectionArr in sections {
+                local cName := sectionArr[1]
+                if (cName != exceptCharName) {
+                    this.sectionStates[cName] := false
+                }
+            }
+        }
     }
 
     ; ------------------------------------------------------------
