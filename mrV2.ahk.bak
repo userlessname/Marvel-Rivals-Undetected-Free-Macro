@@ -169,24 +169,20 @@ while true {
 
     ; Hulk
     if (myGui.IsAbilityActive("Hulk", "Indestructible Guard")) {
-        ; tooltip_center("Indestructible Guard")
         hulk.ability2()
     }
-    if (myGui.IsAbilityActive("Hulk", "Jump")) {
-        ; tooltip_center("Jump")
+    if (myGui.IsAbilityActive("Hulk", "Jump (does not need hp check)")) {
         hulk.jump()
     }
-    
 
     ; Magneto
     if (myGui.IsAbilityActive("Magneto", "Iron Bulwark")) {
-        ; tooltip_center("Iron Bulwark")
         magneto.shield()
     }
     if (myGui.IsAbilityActive("Magneto", "Metallic Curtain")) {
-        ; tooltip_center("Metallic Curtain")
         magneto.shield2()
     }
+
     ; Wolverine
     if (myGui.IsAbilityActive("Wolverine", "Undying Animal")) {
         wolverine.ability1()
@@ -434,7 +430,6 @@ class hulk { ; Pic
     }
 
     static ability2() {
-        ; tooltip_center("ability2")
         if hp.Check("Hulk") {
             n_variants := 25
             shield := isImage_there(this.shield_x1, this.shield_y1, this.shield_x2, this.shield_y2, this.shield_, n_variants)
@@ -447,7 +442,6 @@ class hulk { ; Pic
 
     ; Jump function
     static jump() {
-        ; tooltip_center("jump")
         n_variants := 25
         jump := isImage_there(this.jump_x1, this.jump_y1, this.jump_x2, this.jump_y2, this.jump_, n_variants)
         if not jump.result {
@@ -476,7 +470,7 @@ class magneto {
     }
 
     static shield() {
-        ; tooltip_center("shield")
+        tooltip_center("shield")
         if hp.Check("Magneto") {
             shield := isImage_there(this.shield_x1, this.shield_y1, this.shield_x2, this.shield_y2, this.shield_, 25)
             if shield.result {
@@ -488,7 +482,7 @@ class magneto {
     }
 
     static shield2(){
-        ; tooltip_center("shield2")
+        tooltip_center("shield2")
         ; Retrieve the AddOrMinus value from functionStates
         addOrMinus := myGui.GetAddOrMinusValue("Magneto", "Metallic Curtain")
         if (addOrMinus = "invalid")

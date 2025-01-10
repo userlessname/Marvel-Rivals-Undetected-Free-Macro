@@ -4,7 +4,6 @@
 ; Include necessary libraries
 #Include Lib\AutoHotInterception.ahk
 #Include mouse_keyboard_variables.ahk
-#Include gui.ahk
 
 ; ================================================================================
 ; ================================================================================
@@ -33,13 +32,8 @@ keyboard.id := keyboard_id
 var := variables_()
 
 Sleep 200
-
-; #include gui.ahk
-
-myGui := gui_()   ; Sınıf örneği oluştur
-
-; script otomatik olarak devam eder...
-
+  
+#include gui.ahk
 Persistent
 
 ; Set Coordination Modes
@@ -61,10 +55,10 @@ AHI.SubscribeKey(keyboard.id, GetKeySC("F2"), false, F2)
 
 ; --- Mouse Event Handlers ---
 LeftClick(state){
-    ; tooltip_center("LeftClick")
+    ; tooltip_center("LeftClick") 
     var.mouse_left_state := state
     if (state && var.LAlt_state && var.LCtrl_state){
-        MouseGetPos(&xpos, &ypos)
+        MouseGetPos(&xpos, &ypos) 
         A_Clipboard := "X: " . xpos . ", Y: " . ypos
         tooltip_center(A_Clipboard, 1000)
     }
@@ -95,7 +89,7 @@ F2(state){
     if var.LAlt_state
         send_key("F12")
 }
-LCtrl(state){
+LCtrl(state){  
     if (state && !var.LCtrl_state)
     {
         var.LCtrl_state := true
@@ -124,7 +118,7 @@ active_deactive(){
         tooltip_center(" +++ (1/3) ", 333)
         tooltip_center(" ++++++ (2/3) ", 333)
         tooltip_center(" +++++++++ (3/3) ", 333)
-    }
+    }    
     else
     {
         tooltip_center(" --- (1/3) ", 333)
@@ -132,7 +126,7 @@ active_deactive(){
         tooltip_center(" --------- (3/3) ", 333)
     }
 }
-; --- Capture ---
+; --- Capture --- 
 F9(state) {
     if state
         return
@@ -160,110 +154,85 @@ F9(state) {
 ; --- Main Loop ---
 while true {
     Sleep 256
-
-    ; Dışarıdan gelen “aktif/pasif toggle” değişkeni
-    ; eğer yoksa, bir global veya static harici değişkenden
-    ; alıp kendinize göre düzenleyebilirsiniz:
-    if !var.active_deactive_toggle
+    if not var.active_deactive_toggle
         continue
 
     ; Hulk
-    if (myGui.IsAbilityActive("Hulk", "Indestructible Guard")) {
-        ; tooltip_center("Indestructible Guard")
+    if (functionStates.Has("Hulk") && functionStates["Hulk"].Has(hulk_indestructible_guard) && functionStates["Hulk"][hulk_indestructible_guard]) {
         hulk.ability2()
-    }
-    if (myGui.IsAbilityActive("Hulk", "Jump")) {
-        ; tooltip_center("Jump")
+    } 
+    if (functionStates.Has("Hulk") && functionStates["Hulk"].Has(hulk_jump) && functionStates["Hulk"][hulk_jump]) {
         hulk.jump()
     }
-    
-
     ; Magneto
-    if (myGui.IsAbilityActive("Magneto", "Iron Bulwark")) {
-        ; tooltip_center("Iron Bulwark")
+    if (functionStates.Has("Magneto") && functionStates["Magneto"].Has(magneto_iron_bulwark) && functionStates["Magneto"][magneto_iron_bulwark]) {
         magneto.shield()
     }
-    if (myGui.IsAbilityActive("Magneto", "Metallic Curtain")) {
-        ; tooltip_center("Metallic Curtain")
+    if (functionStates.Has("Magneto") && functionStates["Magneto"].Has(magneto_metallic_curtain) && functionStates["Magneto"][magneto_metallic_curtain]) {
         magneto.shield2()
     }
     ; Wolverine
-    if (myGui.IsAbilityActive("Wolverine", "Undying Animal")) {
+    if (functionStates.Has("Wolverine") && functionStates["Wolverine"].Has(wolverine_undying_animal) && functionStates["Wolverine"][wolverine_undying_animal]) {
         wolverine.ability1()
     }
-
     ; Scarlet Witch
-    if (myGui.IsAbilityActive("Scarlet Witch", "Mystic Projection")) {
+    if (functionStates.Has("Scarlet Witch") && functionStates["Scarlet Witch"].Has(scarletWitch_mystic_projection) && functionStates["Scarlet Witch"][scarletWitch_mystic_projection]) {
         scarlet_witch.ability2()
     }
-
     ; Mantis
-    if (myGui.IsAbilityActive("Mantis", "Natural Anger")) {
+    if (functionStates.Has("Mantis") && functionStates["Mantis"].Has(mantis_natural_anger) && functionStates["Mantis"][mantis_natural_anger]) {
         mantis.ability3()
     }
-
     ; Venom
-    if (myGui.IsAbilityActive("Venom", "Symbiotic Resilience")) {
+    if (functionStates.Has("Venom") && functionStates["Venom"].Has(venom_symbiotic_resilience) && functionStates["Venom"][venom_symbiotic_resilience]) {
         venom.symbiotic_resilience()
     }
-
     ; Thor
-    if (myGui.IsAbilityActive("Thor", "Lightning Realm")) {
+    if (functionStates.Has("Thor") && functionStates["Thor"].Has(thor_lightning_realm) && functionStates["Thor"][thor_lightning_realm]) {
         thor.lightning_realm()
     }
-
     ; Namor
-    if (myGui.IsAbilityActive("Namor", "Blessing of The Deep")) {
+    if (functionStates.Has("Namor") && functionStates["Namor"].Has(namor_blessing_of_the_deep) && functionStates["Namor"][namor_blessing_of_the_deep]) {
         namor.blessing_of_the_deep()
     }
-
     ; Psylocke
-    if (myGui.IsAbilityActive("Psylocke", "Psychic Stealth")) {
+    if (functionStates.Has("Psylocke") && functionStates["Psylocke"].Has(psylocke_psychic_stealth) && functionStates["Psylocke"][psylocke_psychic_stealth]) {
         psylocke.psychic_stealth()
     }
-
     ; Loki
-    if (myGui.IsAbilityActive("Loki", "Deception")) {
+    if (functionStates.Has("Loki") && functionStates["Loki"].Has(loki_deception) && functionStates["Loki"][loki_deception]) {
         loki.deception()
     }
-
     ; Rocket Raccoon
-    if (myGui.IsAbilityActive("Rocket Raccoon", "Repair Mode")) {
+    if (functionStates.Has("Rocket Raccoon") && functionStates["Rocket Raccoon"].Has(rocket_raccoon_repair_mode) && functionStates["Rocket Raccoon"][rocket_raccoon_repair_mode]) {
         rocket_raccoon.repair_mode()
     }
-
     ; Luna Snow
-    if (myGui.IsAbilityActive("Luna Snow", "Ice Arts")) {
+    if (functionStates.Has("Luna Snow") && functionStates["Luna Snow"].Has(luna_snow_ice_arts) && functionStates["Luna Snow"][luna_snow_ice_arts]) {
         luna_snow.ice_arts()
     }
-
     ; Adam Warlock
-    if (myGui.IsAbilityActive("Adam Warlock", "Avatar Life Stream")) {
+    if (functionStates.Has("Adam Warlock") && functionStates["Adam Warlock"].Has(adam_warlock_avatar_life_stream) && functionStates["Adam Warlock"][adam_warlock_avatar_life_stream]) {
         adam_warlock.avatar_life_stream()
     }
-
     ; Jeff The Land Shark
-    if (myGui.IsAbilityActive("Jeff The Land Shark", "Hide and Seek")) {
+    if (functionStates.Has("Jeff The Land Shark") && functionStates["Jeff The Land Shark"].Has(jeff_the_land_shark_hide_and_seek) && functionStates["Jeff The Land Shark"][jeff_the_land_shark_hide_and_seek]) {
         jeff_the_land_shark.hide_and_seek()
     }
-
     ; Captain America
-    if (myGui.IsAbilityActive("Captain America", "Living Legend")) {
+    if (functionStates.Has("Captain America") && functionStates["Captain America"].Has(captain_america_living_legend) && functionStates["Captain America"][captain_america_living_legend]) {
         captain_america.living_legend()
     }
-
     ; Mister Fantastic
-    if (myGui.IsAbilityActive("Mister Fantastic", "Reflexive Rubber")) {
+    if (functionStates.Has("Mister Fantastic") && functionStates["Mister Fantastic"].Has(mister_fantastic_reflexive_rubber) && functionStates["Mister Fantastic"][mister_fantastic_reflexive_rubber]) {
         mister_fantastic.reflexive_rubber()
     }
-
     ; Invisible Woman
-    if (myGui.IsAbilityActive("Invisible Woman", "Double Jump")) {
+    if (functionStates.Has("Invisible Woman") && functionStates["Invisible Woman"].Has(invisible_woman_double_jump) && functionStates["Invisible Woman"][invisible_woman_double_jump]) {
         invisible_woman.double_jump()
     }
 }
-
-; --- Class Definitions ---
+; --- Class Definitions --- 
 class hp{
     static location_ := "\images\Hp\"
     static hpPic_    := hp.location_ . "hpPic.png"
@@ -287,12 +256,9 @@ class hp{
     }
 
     static Check(charName, AddOrMinus := 0) {
-        if (AddOrMinus == "")
-            AddOrMinus := 0
         ; tooltip_center("Checking HP for " . charName)
         hpValue := this.getSliderHp(charName, AddOrMinus)
-        ; tooltip_center(charName . AddOrMinus)
-        hpValueNumber := myGui.getSliderHpNumber(charName)
+        hpValueNumber := this.getSliderHpNumber(charName)
         ; tooltip_center(charName . ": " . hpValue)
         if (hpValue == "invalid")
         {
@@ -353,14 +319,15 @@ class hp{
         }
     }
 
-
+    static getSliderHpNumber(charName){
+        if (functionStates.Has(charName) && functionStates[charName].Has("slider")) {
+            return functionStates[charName]["slider"]
+        }
+        return 0
+    }
 
     static getSliderHp(charName, AddOrMinus := 0){
-        if (AddOrMinus == "")
-            AddOrMinus := 0
-        hpValue := myGui.getSliderHpNumber(charName) + AddOrMinus
-        ; hpValue := myGui.getSliderHpNumber(charName)
-        ; hpValue += hpValue AddOrMinus
+        hpValue := this.getSliderHpNumber(charName) + AddOrMinus
         ; tooltip_center("HP Value for " . charName . ": " . hpValue)
         ; Aralığı belirle
         if (hpValue >= 0 && hpValue < 10) {
@@ -434,7 +401,6 @@ class hulk { ; Pic
     }
 
     static ability2() {
-        ; tooltip_center("ability2")
         if hp.Check("Hulk") {
             n_variants := 25
             shield := isImage_there(this.shield_x1, this.shield_y1, this.shield_x2, this.shield_y2, this.shield_, n_variants)
@@ -446,8 +412,7 @@ class hulk { ; Pic
     }
 
     ; Jump function
-    static jump() {
-        ; tooltip_center("jump")
+    static jump() {   
         n_variants := 25
         jump := isImage_there(this.jump_x1, this.jump_y1, this.jump_x2, this.jump_y2, this.jump_, n_variants)
         if not jump.result {
@@ -476,7 +441,6 @@ class magneto {
     }
 
     static shield() {
-        ; tooltip_center("shield")
         if hp.Check("Magneto") {
             shield := isImage_there(this.shield_x1, this.shield_y1, this.shield_x2, this.shield_y2, this.shield_, 25)
             if shield.result {
@@ -488,14 +452,13 @@ class magneto {
     }
 
     static shield2(){
-        ; tooltip_center("shield2")
         ; Retrieve the AddOrMinus value from functionStates
-        addOrMinus := myGui.GetAddOrMinusValue("Magneto", "Metallic Curtain")
+        addOrMinus := this.GetAddOrMinusValue("Magneto", "Metallic Curtain")
         if (addOrMinus = "invalid")
             return
 
         if hp.Check("Magneto", addOrMinus) {
-            shield2 := isImage_there(this.shield2_x1, this.shield2_y1, this.shield2_x2, this.shield2_y2, this.shield2_, 25)
+            shield2 := isImage_there(this.shield2_x1, this.shield2_y1, this.shield2_x2, this.shield2_y2, this.shield2_, 25) 
             if shield2.result {
                 send_key("E")
             }
@@ -506,6 +469,18 @@ class magneto {
     ; FUNCTION: GetAddOrMinusValue
     ; PURPOSE:  Retrieve the AddOrMinus value from functionStates
     ; -------------------------------------------------------------------
+    static GetAddOrMinusValue(sectionName, funcName) {
+        global functionStates
+        if (functionStates.Has(sectionName) && functionStates[sectionName].Has(funcName "_AddOrMinus")) {
+            local value := functionStates[sectionName][funcName "_AddOrMinus"]
+            ; Validate that the value is a number
+            if RegExMatch(value, "^-?\d+$") {
+                return value
+            }
+        }
+        ; If not found or invalid, return a default value or "invalid"
+        return "invalid"
+    }
 
     ; Prevent modification of constants
     __Set(name, value) {
@@ -573,18 +548,18 @@ class mantis{
         ; CaptureScreenRegion(this.lifeOrb1_x1, this.lifeOrb1_y1, this.lifeOrb1_x2, this.lifeOrb1_y2, this.lifeOrb1_)
     }
 
-    static ability3()
+    static ability3() 
     {
         ; tooltip_center("amntis ability3")
-        if hp.Check("Mantis")
+        if hp.Check("Mantis") 
         {
             ; tooltip_center("hp")
             ability3 := isImage_there(this.ability3_x1, this.ability3_y1, this.ability3_x2, this.ability3_y2, this.ability3_, 25)
-            if ability3.result
+            if ability3.result 
             {
                 ; tooltip_center("ability3")
                 lifeOrb1 := isImage_there(this.lifeOrb1_x1, this.lifeOrb1_y1, this.lifeOrb1_x2, this.lifeOrb1_y2, this.lifeOrb1_, 2)
-                if lifeOrb1.result
+                if lifeOrb1.result 
                 {
                     ; tooltip_center("lifeOrb1")
                     send_key("F")
@@ -608,14 +583,14 @@ class venom{
         ; CaptureScreenRegion(this.symbiotic_resilience_x1, this.symbiotic_resilience_y1, this.symbiotic_resilience_x2, this.symbiotic_resilience_y2, this.symbiotic_resilience_)
     }
 
-    static symbiotic_resilience()
+    static symbiotic_resilience() 
     {
         ; tooltip_center("vocum symbiotic_resilience")
-        if hp.Check("Venom")
+        if hp.Check("Venom") 
         {
             ; tooltip_center("hp")
             symbiotic_resilience := isImage_there(this.symbiotic_resilience_x1, this.symbiotic_resilience_y1, this.symbiotic_resilience_x2, this.symbiotic_resilience_y2, this.symbiotic_resilience_, 25)
-            if symbiotic_resilience.result
+            if symbiotic_resilience.result 
             {
                 send_key(var.mouse_middle_code, true)
             }
@@ -631,14 +606,14 @@ class thor{
         ; CaptureScreenRegion(this.lightning_realm_x1, this.lightning_realm_y1, this.lightning_realm_x2, this.lightning_realm_y2, this.lightning_realm_)
     }
 
-    static lightning_realm()
+    static lightning_realm() 
     {
         ; tooltip_center("vocum lightning_realm")
-        if hp.Check("Thor")
+        if hp.Check("Thor") 
         {
             ; tooltip_center("hp")
             lightning_realm := isImage_there(this.lightning_realm_x1, this.lightning_realm_y1, this.lightning_realm_x2, this.lightning_realm_y2, this.lightning_realm_, 25)
-            if lightning_realm.result
+            if lightning_realm.result 
             {
                 send_key("E")
                 ; send_key(var.mouse_middle_code, true)
@@ -655,14 +630,14 @@ class namor{
         ; CaptureScreenRegion(this.blessing_of_the_deep_x1, this.blessing_of_the_deep_y1, this.blessing_of_the_deep_x2, this.blessing_of_the_deep_y2, this.blessing_of_the_deep_)
     }
 
-    static blessing_of_the_deep()
+    static blessing_of_the_deep() 
     {
         ; tooltip_center("vocum blessing_of_the_deep")
-        if hp.Check("Namor")
+        if hp.Check("Namor") 
         {
             ; tooltip_center("hp")
             blessing_of_the_deep := isImage_there(this.blessing_of_the_deep_x1, this.blessing_of_the_deep_y1, this.blessing_of_the_deep_x2, this.blessing_of_the_deep_y2, this.blessing_of_the_deep_, 25)
-            if blessing_of_the_deep.result
+            if blessing_of_the_deep.result 
             {
                 send_key("E")
                 ; send_key(var.mouse_middle_code, true)
@@ -679,14 +654,14 @@ class psylocke{
         ; CaptureScreenRegion(this.psychic_stealth_x1, this.psychic_stealth_y1, this.psychic_stealth_x2, this.psychic_stealth_y2, this.psychic_stealth_)
     }
 
-    static psychic_stealth()
+    static psychic_stealth() 
     {
         ; tooltip_center("vocum psychic_stealth")
-        if hp.Check("Psylocke")
+        if hp.Check("Psylocke") 
         {
             ; tooltip_center("hp")
             psychic_stealth := isImage_there(this.psychic_stealth_x1, this.psychic_stealth_y1, this.psychic_stealth_x2, this.psychic_stealth_y2, this.psychic_stealth_, 25)
-            if psychic_stealth.result
+            if psychic_stealth.result 
             {
                 ; send_key("E")
                 send_key(var.mouse_middle_code, true)
@@ -703,15 +678,15 @@ class loki{
     static capture() {
         ; CaptureScreenRegion(this.deception_x1, this.deception_y1, this.deception_x2, this.deception_y2, this.deception_)
     }
-
-    static deception()
+    
+    static deception() 
     {
         ; tooltip_center("vocum deception")
-        if hp.Check("Loki")
+        if hp.Check("Loki") 
         {
             ; tooltip_center("hp")
             deception := isImage_there(this.deception_x1, this.deception_y1, this.deception_x2, this.deception_y2, this.deception_, 25)
-            if deception.result
+            if deception.result 
             {
                 ; send_key("E")
                 send_key(var.mouse_right_code, true)
@@ -728,15 +703,15 @@ class rocket_raccoon{ ; Pic
     static capture() {
         ; CaptureScreenRegion(this.gun_x1, this.gun_y1, this.gun_x2, this.gun_y2, this.gun_)
     }
-
-    static repair_mode()
+    
+    static repair_mode() 
     {
         ; tooltip_center("repair_mode")
-        if hp.Check("Rocket Raccoon")
+        if hp.Check("Rocket Raccoon") 
         {
             n_variants := 25
             gun := isImage_there(this.gun_x1, this.gun_y1, this.gun_x2, this.gun_y2, this.gun_, n_variants)
-            if gun.result
+            if gun.result 
             {
                 ; tooltip_center("hp")
                 send_key(var.mouse_right_code, true)
@@ -754,15 +729,15 @@ class luna_snow{
     static capture() {
         ; CaptureScreenRegion(this.ice_arts_x1, this.ice_arts_y1, this.ice_arts_x2, this.ice_arts_y2, this.ice_arts_)
     }
-
-    static ice_arts()
+    
+    static ice_arts() 
     {
         ; tooltip_center("ice_arts")
-        if hp.Check("Luna Snow")
+        if hp.Check("Luna Snow") 
         {
             ; tooltip_center("hp")
             ice_arts := isImage_there(this.ice_arts_x1, this.ice_arts_y1, this.ice_arts_x2, this.ice_arts_y2, this.ice_arts_, 25)
-            if ice_arts.result
+            if ice_arts.result 
             {
                 send_key("E")
                 ; send_key(var.mouse_right_code, true)
@@ -779,15 +754,15 @@ class adam_warlock{
     static capture() {
         ; CaptureScreenRegion(this.avatar_life_stream_x1, this.avatar_life_stream_y1, this.avatar_life_stream_x2, this.avatar_life_stream_y2, this.avatar_life_stream_)
     }
-
-    static avatar_life_stream()
+    
+    static avatar_life_stream() 
     {
         ; tooltip_center("avatar_life_stream")
-        if hp.Check("Adam Warlock")
+        if hp.Check("Adam Warlock") 
         {
             ; tooltip_center("hp")
             avatar_life_stream := isImage_there(this.avatar_life_stream_x1, this.avatar_life_stream_y1, this.avatar_life_stream_x2, this.avatar_life_stream_y2, this.avatar_life_stream_, 25)
-            if avatar_life_stream.result
+            if avatar_life_stream.result 
             {
                 ; send_key("E")
                 send_key(var.mouse_middle_code, true)
@@ -804,15 +779,15 @@ class jeff_the_land_shark{
     static capture() {
         ; CaptureScreenRegion(this.hide_and_seek_x1, this.hide_and_seek_y1, this.hide_and_seek_x2, this.hide_and_seek_y2, this.hide_and_seek_)
     }
-
-    static hide_and_seek()
+    
+    static hide_and_seek() 
     {
         ; tooltip_center("hide_and_seek")
-        if hp.Check("Jeff The Land Shark")
+        if hp.Check("Jeff The Land Shark") 
         {
             ; tooltip_center("hp")
             hide_and_seek := isImage_there(this.hide_and_seek_x1, this.hide_and_seek_y1, this.hide_and_seek_x2, this.hide_and_seek_y2, this.hide_and_seek_, 25)
-            if hide_and_seek.result
+            if hide_and_seek.result 
             {
                 send_key("E")
                 ; send_key(var.mouse_middle_code, true)
@@ -832,20 +807,20 @@ class captain_america{
         ; CaptureScreenRegion(this.living_legend_x1, this.living_legend_y1, this.living_legend_x2, this.living_legend_y2, this.living_legend_)
         ; CaptureScreenRegion(this.arm_x1, this.arm_y1, this.arm_x2, this.arm_y2, this.arm_)
     }
-
-    static living_legend()
+    
+    static living_legend() 
     {
         arm := isImage_there(this.arm_x1, this.arm_y1, this.arm_x2, this.arm_y2, this.arm_, 25)
 
-        if hp.Check("Captain America")
+        if hp.Check("Captain America") 
         {
             ; tooltip_center("captain america")
             ; tooltip_center("hp")
             living_legend := isImage_there(this.living_legend_x1, this.living_legend_y1, this.living_legend_x2, this.living_legend_y2, this.living_legend_, 25)
-            if living_legend.result
+            if living_legend.result 
             {
                 ; send_key("E")
-
+                
                 AHI.SendMouseButtonEvent(mouse.id, var.mouse_right_code, 1)
                 ; send_key(var.mouse_right_code, true)
             }
@@ -860,20 +835,20 @@ class mister_fantastic{
     static capture() {
         ; CaptureScreenRegion(this.reflexive_rubber_x1, this.reflexive_rubber_y1, this.reflexive_rubber_x2, this.reflexive_rubber_y2, this.reflexive_rubber_)
     }
-
-    static reflexive_rubber()
+    
+    static reflexive_rubber() 
     {
         reflexive_rubber := isImage_there(this.reflexive_rubber_x1, this.reflexive_rubber_y1, this.reflexive_rubber_x2, this.reflexive_rubber_y2, this.reflexive_rubber_, 25)
 
-        if hp.Check("Mister Fantastic")
+        if hp.Check("Mister Fantastic") 
         {
             ; tooltip_center("Mister Fantastic")
             ; tooltip_center("hp")
             reflexive_rubber := isImage_there(this.reflexive_rubber_x1, this.reflexive_rubber_y1, this.reflexive_rubber_x2, this.reflexive_rubber_y2, this.reflexive_rubber_, 25)
-            if reflexive_rubber.result
+            if reflexive_rubber.result 
             {
                 send_key("E")
-
+                
                 ; AHI.SendMouseButtonEvent(mouse.id, var.mouse_right_code, 1)
                 ; send_key(var.mouse_right_code, true)
             }
@@ -891,23 +866,23 @@ class invisible_woman{
         ; CaptureScreenRegion(this.double_jump_x1, this.double_jump_y1, this.double_jump_x2, this.double_jump_y2, this.double_jump_)
         CaptureScreenRegion(this.double_jump_2_x1, this.double_jump_2_y1, this.double_jump_2_x2, this.double_jump_2_y2, this.double_jump_2_)
     }
-
-    static double_jump()
+    
+    static double_jump() 
     {
         double_jump := isImage_there(this.double_jump_x1, this.double_jump_y1, this.double_jump_x2, this.double_jump_y2, this.double_jump_, 25)
 
-        if hp.Check("Invisible Woman")
+        if hp.Check("Invisible Woman") 
         {
             ; tooltip_center("Invisible Woman")
             double_jump_2 := isImage_there(this.double_jump_2_x1, this.double_jump_2_y1, this.double_jump_2_x2, this.double_jump_2_y2, this.double_jump_2_, 25)
-            if double_jump_2.result
+            if double_jump_2.result 
             {
                 send_key("Space")
-
+                
                 ; AHI.SendMouseButtonEvent(mouse.id, var.mouse_right_code, 1)
                 ; send_key(var.mouse_right_code, true)
             }
-            else
+            else 
             {
                 double_jump := isImage_there(this.double_jump_x1, this.double_jump_y1, this.double_jump_x2, this.double_jump_y2, this.double_jump_, 25)
                 if double_jump.result

@@ -16,9 +16,9 @@ class mouse_ {
         if (handle == "")
         {
             this.subs()
-            ; Sleep 200
+            Sleep 200
             this.MouseMoveWaitToContinue()
-            ; Sleep 200
+            Sleep 200
         }
         else
         {
@@ -52,7 +52,7 @@ class mouse_ {
                 this.AHI.UnsubscribeMouseMove(deviceId) ; Aboneliği kaldır
             }
         }
-        this.id := this.AHI.GetMouseIdFromHandle(this.handle)
+        ; this.id := this.AHI.GetMouseIdFromHandle(this.handle)
 
         ; Seçilen fare bilgilerini göster
         ; MsgBox("Fare Seçildi!`nHandle: " this.handle "`nID: " this.id)
@@ -92,9 +92,9 @@ class keyboard_ {
         if (handle == "")
         {
             this.subs()
-            ; Sleep 200
+            Sleep 200
             this.KeyWaitAnyToContinue()
-            ; Sleep 200
+            Sleep 200
         }
         else
         {
@@ -125,7 +125,7 @@ class keyboard_ {
                     this.AHI.UnsubscribeKeyboard(deviceId) ; Aboneliği kaldır
                 }
             }  
-            this.id := this.AHI.GetKeyboardIdFromHandle(this.handle)
+            ; this.id := this.AHI.GetKeyboardIdFromHandle(this.handle)
             ToolTip ; ToolTip'i kapat 
         }
     }

@@ -1,415 +1,442 @@
 #Requires AutoHotkey v2.0
+; myGui := gui_()   ; Sınıf örneği oluştur
 
-; -------------------------------------------------------------------
-; GLOBAL SETTINGS
-; -------------------------------------------------------------------
-global xMarginLeft     := 10
-global xMarginRight    := 8
-global yMarginTop      := 50  ; Increased top margin for group labels
-global yMarginBottom   := 42
-global sectionW        := 300
-global buttonSpacing   := 30
-global sectionSpacing  := 5
-global groupSpacing    := 20  ; Space between groups
+class gui_ {
+    ; ------------------------------------------------------------
+    ; 1) GLOBAL GİBİ OLAN AYARLARI ARTIK SINIF DEĞİŞKENLERİ OLARAK TANIMLIYORUZ
+    ; ------------------------------------------------------------
+    xMarginLeft     := 10
+    xMarginRight    := 8
+    yMarginTop      := 50
+    yMarginBottom   := 42
+    sectionW        := 300
+    groupSpacing    := 20
 
-; Varsayılan input değerleri (Default input values)
-global defaultShield2Value := "-40"
+    buttonHeight    := 30
+    checkboxSpacing := 22
+    sliderSpacing   := 35
 
-; Bölümlerin open/close durumu, toggleBtn ve Controls dizilerini tutar
-; (Holds open/close states of sections, toggleBtn, and Controls arrays)
-global sectionStates := Map()
-global functionStates := Map()
+    defaultShield2Value := "-40"
+    currentGuiHeight    := 720
 
-; -------------------------------------------------------------------
-; MAIN GUI
-; -------------------------------------------------------------------
-myGui := Gui("+Resize", "Marvel Rivals Characters")
-myGui.BackColor := 0x619c4a
+    ; Bölüm durumları ve fonksiyon durumlarını tutacak Map() yapıları
+    sectionStates  := Map()  ; sectionStates[charName] -> true/false
+    functionStates := Map()  ; functionStates[charName][func_name or slider] -> değer
 
-; Define group positions
-xDefence := xMarginLeft
-xAttack := xDefence + sectionW + groupSpacing
-xHealer := xAttack + sectionW + groupSpacing
+    ; Her grubun içerisindeki karakterleri tutan dizi (Map içinde Array)
+    groupSections  := Map()
 
-; Initialize Y positions for each group
-global yPosDefence := yMarginTop
-global yPosAttack := yMarginTop
-global yPosHealer := yMarginTop
+    ; GUI ve boyut
+    gui            := ""
+    guiWidth       := 0
 
-; Add Group Labels
-myGui.AddText("x" (xDefence + (sectionW / 2) - 30) " y" (yMarginTop - 30), "Defence")
-myGui.AddText("x" (xAttack + (sectionW / 2) - 30) " y" (yMarginTop - 30), "Attack")
-myGui.AddText("x" (xHealer + (sectionW / 2) - 30) " y" (yMarginTop - 30), "Healer")
+    ; Grupların X pozisyonları
+    xDefence       := 0
+    xAttack        := 0
+    xHealer        := 0
 
-; -------------------------------------------------------------------
-; Add Defence Group Characters
-; -------------------------------------------------------------------
-hulk_indestructible_guard       := "Indestructible Guard"
-hulk_jump                       := "Jump (does not need hp check)"
-magneto_iron_bulwark            := "Iron Bulwark"
-magneto_metallic_curtain        := "Metallic Curtain"
-venom_symbiotic_resilience      := "Symbiotic Resilience"
-thor_lightning_realm            := "Lightning Realm"
+    ; ------------------------------------------------------------
+    ; SINIF OLUŞTUĞUNDA (CONSTRUCTOR) YAPILACAKLAR
+    ; ------------------------------------------------------------
+    __New() {
+        ; 1) Grup dizilerini ayarla
+        this.groupSections["Defence"] := []
+        this.groupSections["Attack"]  := []
+        this.groupSections["Healer"]  := []
 
-AddCharacterSection(myGui, "Hulk", [hulk_indestructible_guard, hulk_jump], xDefence, &yPosDefence, 70)
-AddCharacterSection(myGui, "Magneto", [magneto_iron_bulwark, magneto_metallic_curtain], xDefence, &yPosDefence, 70)
-AddCharacterSection(myGui, "Venom", [venom_symbiotic_resilience], xDefence, &yPosDefence, 70)
-AddCharacterSection(myGui, "Thor", [thor_lightning_realm], xDefence, &yPosDefence, 70)
+        ; 2) Ana GUI oluştur
+        this.gui := Gui("+Resize", "Marvel Rivals Characters")
+        this.gui.BackColor := 0x619c4a
 
-; -------------------------------------------------------------------
-; Add Attack Group Characters
-; -------------------------------------------------------------------
-wolverine_undying_animal        := "Undying Animal"
-scarletWitch_mystic_projection  := "Mystic Projection"
-namor_blessing_of_the_deep      := "Blessing of The Deep"
-psylocke_psychic_stealth        := "Psychic Stealth"
+        ; 3) Grupların x konumlarını hesapla
+        this.xDefence := this.xMarginLeft
+        this.xAttack  := this.xDefence + this.sectionW + this.groupSpacing
+        this.xHealer  := this.xAttack  + this.sectionW + this.groupSpacing
 
-AddCharacterSection(myGui, "Wolverine", [wolverine_undying_animal], xAttack, &yPosAttack, 80)
-AddCharacterSection(myGui, "Scarlet Witch", [scarletWitch_mystic_projection], xAttack, &yPosAttack, 70)
-AddCharacterSection(myGui, "Namor", [namor_blessing_of_the_deep], xAttack, &yPosAttack, 50)
-AddCharacterSection(myGui, "Psylocke", [psylocke_psychic_stealth], xAttack, &yPosAttack, 70)
+        ; 4) Grup başlıklarını ekle
+        this.gui.AddText("x" (this.xDefence + (this.sectionW / 2) - 30) " y" (this.yMarginTop - 30), "Defence")
+        this.gui.AddText("x" (this.xAttack  + (this.sectionW / 2) - 30) " y" (this.yMarginTop - 30), "Attack")
+        this.gui.AddText("x" (this.xHealer  + (this.sectionW / 2) - 30) " y" (this.yMarginTop - 30), "Healer")
 
-; -------------------------------------------------------------------
-; Add Healer Group Characters
-; -------------------------------------------------------------------
-mantis_natural_anger            := "Natural Anger"
-loki_deception                  := "Deception"
-rocket_raccoon_repair_mode      := "Repair Mode"
-adam_warlock_avatar_life_stream := "Avatar Life Stream"
-jeff_the_land_shark_hide_and_seek := "Hide and Seek"
-luna_snow_ice_arts := "Ice Arts"
+        ; 5) Tüm karakterleri ekleyen metodu çağır
+        this.AddAllCharacterSections()
 
-AddCharacterSection(myGui, "Mantis", [mantis_natural_anger], xHealer, &yPosHealer, 100)
-AddCharacterSection(myGui, "Loki", [loki_deception], xHealer, &yPosHealer, 40)
-AddCharacterSection(myGui, "Rocket Raccoon", [rocket_raccoon_repair_mode], xHealer, &yPosHealer, 95)
-AddCharacterSection(myGui, "Adam Warlock", [adam_warlock_avatar_life_stream], xHealer, &yPosHealer, 40)
-AddCharacterSection(myGui, "Jeff The Land Shark", [jeff_the_land_shark_hide_and_seek], xHealer, &yPosHealer, 60)
-AddCharacterSection(myGui, "Luna Snow", [luna_snow_ice_arts], xHealer, &yPosHealer, 60)
+        ; 6) GUI boyutunu ayarla ve göster
+        this.guiWidth := (3 * this.sectionW) + (2 * this.groupSpacing) + this.xMarginLeft + this.xMarginRight
+        this.gui.Show("w" this.guiWidth " h" this.currentGuiHeight)
 
-; -------------------------------------------------------------------
-; Show GUI
-; -------------------------------------------------------------------
-; Calculate total GUI width to accommodate three groups
-guiWidth := (3 * sectionW) + (2 * groupSpacing) + xMarginLeft + xMarginRight
-myGui.Show("w" guiWidth " h550")
-AdjustGuiSize(myGui)
+        ; 7) Başlangıçta tüm bölümler kapalı olacağı için layout’u ilk kez uygula
+        this.LayoutAllGroups()
 
-; -------------------------------------------------------------------
-; CLOSE OLAYI İÇİN OLAY İŞLEYİCİ EKLE
-; (Add event handler for close event)
-; -------------------------------------------------------------------
-myGui.OnEvent("Close", (*) => ExitApp())
+        ; 8) Pencere kapatılınca script sonlansın
+        this.gui.OnEvent("Close", (*) => ExitApp())
+    }
 
-; -------------------------------------------------------------------
-; FUNCTION: AddCharacterSection
-; PURPOSE:  Karakter için toggle butonu + kontrol checkbox'ları ve slider ekler
-; (Adds a toggle button + control checkboxes and slider for the character)
-; -------------------------------------------------------------------
-AddCharacterSection(guiObj, charName, functions_names, baseX, &baseY, defaultSliderValue := 50) {
-    global sectionW, buttonSpacing, sectionSpacing
-    global sectionStates, functionStates, defaultShield2Value
+    ; ------------------------------------------------------------
+    ; 2) TÜM KARAKTERLERİ TOPLUCA EKLEME
+    ; ------------------------------------------------------------
+    AddAllCharacterSections() {
+        ; Defence
+        this.AddCharacterSection("Defence", "Hulk",            ["Indestructible Guard", "Jump"], 70, 18)
+        this.AddCharacterSection("Defence", "Captain America", ["Living Legend"],                                          60)
+        this.AddCharacterSection("Defence", "Venom",           ["Symbiotic Resilience"],                                  70)
+        this.AddCharacterSection("Defence", "Magneto",         ["Iron Bulwark", "Metallic Curtain"],                      70, 18)
+        this.AddCharacterSection("Defence", "Thor",            ["Lightning Realm"],                                       70)
 
-    ; Initialize section state as closed
-    sectionStates[charName] := false
+        ; Attack
+        this.AddCharacterSection("Attack",  "Scarlet Witch",   ["Mystic Projection"],                                     70)
+        this.AddCharacterSection("Attack",  "Namor",           ["Blessing of The Deep"],                                  50)
+        this.AddCharacterSection("Attack",  "Psylocke",        ["Psychic Stealth"],                                       70)
+        this.AddCharacterSection("Attack",  "Wolverine",       ["Undying Animal"],                                        80)
+        this.AddCharacterSection("Attack",  "Mister Fantastic",["Reflexive Rubber"],                                      50)
 
-    ; Add toggle button at (baseX, baseY)
-    toggleBtn := guiObj.AddButton(
-        "x" baseX
-      . " y" baseY
-      . " w" (sectionW - xMarginLeft - xMarginRight)
-      . " h30"
-      , charName
-    )
-    sectionStates[charName "ToggleBtn"] := toggleBtn
+        ; Healer
+        this.AddCharacterSection("Healer",  "Loki",            ["Deception"],                                             40)
+        this.AddCharacterSection("Healer",  "Mantis",          ["Natural Anger"],                                         100)
+        this.AddCharacterSection("Healer",  "Rocket Raccoon",  ["Repair Mode"],                                           95)
+        this.AddCharacterSection("Healer",  "Luna Snow",       ["Ice Arts"],                                              60)
+        this.AddCharacterSection("Healer",  "Adam Warlock",    ["Avatar Life Stream"],                                    40)
+        this.AddCharacterSection("Healer",  "Jeff The Land Shark", ["Hide and Seek"],                                     60)
+        this.AddCharacterSection("Healer",  "Invisible Woman", ["Double Jump"],                                           70)
+    }
 
-    ; Event handler for toggle button
-    toggleBtn.OnEvent("Click", (*) => ToggleSection(guiObj, charName))
+    ; ------------------------------------------------------------
+    ; 3) BİR KARAKTER BÖLÜMÜ (SECTION) EKLEME
+    ; ------------------------------------------------------------
+    AddCharacterSection(groupName, charName, functions_names, defaultSliderValue := 50, customCheckboxSpacing := 25) {
+        ; Başlangıçta kapalı olacak
+        this.sectionStates[charName] := false
 
-    ; Increment Y position for next control
-    baseY += buttonSpacing
+        ; Toggle butonu yarat
+        toggleBtn := this.gui.AddButton("w280 h" this.buttonHeight, charName)
+        toggleBtn.OnEvent("Click", (*) => this.ToggleSection(groupName, charName))
 
-    ; Create controls (checkboxes, HP text, and slider)
-    controls := []
+        ; Kontrolleri tutacak bir dizi
+        controls := []
 
-    ; Add checkboxes
-    for func_name in functions_names {
-        local f_name := func_name
-        cb := guiObj.AddCheckBox("x" (baseX + 10) " y" (baseY + 10), f_name)
-        cb.OnEvent("Click", HandleCheckboxClickClosure(charName, f_name, cb)) ; Closure event handler
-        controls.Push(cb)
-
-        ; **Add Input Box for Specific Functions**
-        if (charName = "Magneto" && func_name = "Metallic Curtain") {
-            ; Add the label "Add or Minus"
-            add_or_minus_text := "Hp Add or Minus:"
-            addOrMinusText := guiObj.AddText("x" (baseX + 110) " y" (baseY + 10), add_or_minus_text)
-            controls.Push(addOrMinusText)
-
-            ; Add the input box (Edit control)
-            hpInputBox := guiObj.AddEdit("x" (baseX + 200) " y" (baseY + 8) " w60 h15", defaultShield2Value)
-
-            ; Validation event handler
-            hpInputBox.OnEvent("Change", (*) => HandleShield2InputChange(charName, hpInputBox))
-
-            controls.Push(hpInputBox)
-
-            ; Initialize shield2_AddOrMinus
-            if (!functionStates.Has(charName)) {
-                functionStates[charName] := Map()
+        ; CheckBox’ları ekle
+        index := 0
+        checkbox_1 := ""
+        checkbox_2 := ""
+        for func_name in functions_names {
+            index += 1
+            if (index == 1)
+            {
+                checkbox_1 := func_name
             }
-            if (!functionStates[charName].Has("Metallic Curtain_AddOrMinus")) {
-                functionStates[charName]["Metallic Curtain_AddOrMinus"] := defaultShield2Value
+            else if (index == 2)
+            {
+                checkbox_2 := func_name
             }
         }
 
-        baseY += 25  ; Increment Y for next checkbox
+        index := 0
+        for func_name in functions_names {
+            index += 1
+            local f_name := func_name
+            ; ToolTip(func_name)
+            
+            ; =======================================================================================
+            ; cb := this.gui.AddCheckBox("w300 h20", f_name)
+            ; cb.Visible := false
+            ; ; Closure: tıklanınca HandleCheckboxClick metodunu çağıracak
+            ; cb.OnEvent("Click", (ctrl, *) => this.HandleCheckboxClick(charName, f_name, ctrl))
+            ; controls.Push(cb)
+            ; =======================================================================================
+            if (index == 1)
+            {
+                cb := this.gui.AddCheckBox("w300 h20", checkbox_1)
+                cb.Visible := false
+                cb.OnEvent("Click", (ctrl, *) => this.HandleCheckboxClick(charName, checkbox_1, ctrl))
+                controls.Push(cb)
+            }
+            else if (index == 2)
+            {
+                cb := this.gui.AddCheckBox("w300 h20", checkbox_2)
+                cb.Visible := false
+                cb.OnEvent("Click", (ctrl, *) => this.HandleCheckboxClick(charName, checkbox_2, ctrl))
+                controls.Push(cb)
+            }
+            ; =======================================================================================
+            ; Magneto + Metallic Curtain => Edit kutusu ekle
+            if (charName = "Magneto" && f_name = "Metallic Curtain") {
+                textLabel := this.gui.AddText("w90", "Hp Add or Minus:")
+                textLabel.Visible := false
+                controls.Push(textLabel)
+
+                hpInput := this.gui.AddEdit("w60 h20", this.defaultShield2Value)
+                hpInput.Visible := false
+                hpInput.OnEvent("Change", (ctrl, *) => this.HandleShield2InputChange(charName, ctrl))
+                controls.Push(hpInput)
+
+                ; Magneto durumu hafızaya kaydet
+                if !this.functionStates.Has(charName)
+                    this.functionStates[charName] := Map()
+                this.functionStates[charName]["Metallic Curtain_AddOrMinus"] := this.defaultShield2Value
+            }
+        }
+
+        ; HP label ve slider
+        hpText := this.gui.AddText("w40", "HP:")
+        hpText.Visible := false
+        controls.Push(hpText)
+
+        slider := this.gui.AddSlider("Range0-100 ToolTip w200 h20", defaultSliderValue)
+        slider.Visible := false
+        slider.OnEvent("Change", (ctrl, *) => this.HandleSliderChange(charName, ctrl))
+        controls.Push(slider)
+
+        ; functionStates’e kaydet (slider başlangıç değeri)
+        if !this.functionStates.Has(charName)
+            this.functionStates[charName] := Map()
+        this.functionStates[charName]["slider"] := defaultSliderValue
+
+        ; Son olarak bu karakteri, ilgili gruba ekle
+        this.groupSections[groupName].Push([charName, toggleBtn, controls, customCheckboxSpacing])
     }
 
-    ; Add HP Text
-    hpText := guiObj.AddText("x" (baseX + 10) " y" (baseY + 5), "HP:")
-    controls.Push(hpText)
-
-    ; Add Slider
-    slider := guiObj.AddSlider(
-        "x" (baseX + 60) " y" baseY " w" (sectionW - xMarginLeft - xMarginRight - 70) " Range0-100 ToolTip",
-        defaultSliderValue
-    )
-    slider.OnEvent("Change", (*) => HandleSliderChange(charName, slider))
-    controls.Push(slider)
-
-    baseY += 40  ; Increment Y after slider
-
-    ; Save controls and hide them initially
-    sectionStates[charName "Controls"] := controls
-    for ctrl in controls
-        ctrl.Visible := false
-
-    ; Add slider's default value to functionStates
-    if (!functionStates.Has(charName)) {
-        functionStates[charName] := Map()
+    ; ------------------------------------------------------------
+    ; 4) TÜM GRUPLARI LAYOUT ET (Defence, Attack, Healer)
+    ; ------------------------------------------------------------
+    LayoutAllGroups() {
+        this.LayoutGroupSections("Defence")
+        this.LayoutGroupSections("Attack")
+        this.LayoutGroupSections("Healer")
+        this.AdjustGuiSize()
     }
-    functionStates[charName]["slider"] := defaultSliderValue
-}
-
-
-; -------------------------------------------------------------------
-; EVENT HANDLER: HandleCheckboxClickClosure
-; PURPOSE:  Creates a closure for the HandleCheckboxClick event handler
-; -------------------------------------------------------------------
-HandleCheckboxClickClosure(sectionName, funcName, checkCtrl){
-    return (*) => HandleCheckboxClick(sectionName, funcName, checkCtrl)
-}
-
-; -------------------------------------------------------------------
-; EVENT HANDLER: HandleCheckboxClick
-; PURPOSE: Checkbox durumunu güncelle (Update checkbox status)
-; -------------------------------------------------------------------
-HandleCheckboxClick(sectionName, funcName, checkCtrl) {
-    global functionStates, sectionStates
-    ; Update functionStates
-    if !functionStates.Has(sectionName)
-        functionStates[sectionName] := Map()
-    functionStates[sectionName][funcName] := checkCtrl.Value
-
-    ; Eğer bu checkbox yeni seçildiyse, diğer bölümlerdeki checkbox'ları temizle
-     ; (If this checkbox is newly selected, clear checkboxes in other sections)
-    if (checkCtrl.Value) {
-        UncheckOtherSections(sectionName, funcName)
+    getSliderHpNumber(charName){
+        if (this.functionStates.Has(charName) && this.functionStates[charName].Has("slider")) {
+            return this.functionStates[charName]["slider"]
+        }
+        return 0
     }
+    IsAbilityActive(charName, funcName) {
+        return this.functionStates.Has(charName)
+            && this.functionStates[charName].Has(funcName)
+            && this.functionStates[charName][funcName]   ; true/false
+    }
+    GetAddOrMinusValue(sectionName, funcName) {
+        if (this.functionStates.Has(sectionName) && this.functionStates[sectionName].Has(funcName "_AddOrMinus")) {
+            local value := this.functionStates[sectionName][funcName "_AddOrMinus"]
+            ; Validate that the value is a number
+            if RegExMatch(value, "^-?\d+$") {
+                return value
+            }
+        }
+        ; If not found or invalid, return a default value or "invalid"
+        return "invalid"
+    }
+    ; Belirli bir grup içindeki tüm bölümleri yatay/dikey konumlandır
+    LayoutGroupSections(groupName) {
+        local xPos := (groupName = "Defence") ? this.xDefence
+                 : (groupName = "Attack")    ? this.xAttack
+                 : this.xHealer
 
-    ; **Enable/Disable the Input Box for shield2**
-    if (sectionName = "Magneto" && funcName = "Metallic Curtain") {
-        local controls := sectionStates[sectionName "Controls"]
-        for index, ctrl in controls {
-            if (ctrl.Type = "Edit") {
-                ctrl.Enabled := checkCtrl.Value
-                if (!checkCtrl.Value) {
-                    ctrl.Value := defaultShield2Value ; Reset to default global değişken (Reset to default global variable)
-                    functionStates[sectionName]["Metallic Curtain_AddOrMinus"] := defaultShield2Value
+        local yPos := this.yMarginTop
+
+        for sectionArr in this.groupSections[groupName] {
+            charName   := sectionArr[1]
+            toggleBtn  := sectionArr[2]
+            controls   := sectionArr[3]
+            cSpacing   := sectionArr[4]
+
+            local isExpanded := this.sectionStates[charName]
+
+            ; Toggle buton konumu
+            toggleBtn.Move(xPos, yPos, this.sectionW - 20, this.buttonHeight)
+            yPos += (this.buttonHeight + 5)
+
+            ; Eğer açılmışsa (expanded) kontrolleri sırayla yerleştir
+            if (isExpanded) {
+                for ctrl in controls {
+                    ctrl.Move(xPos + 20, yPos)
+                    ctrl.Visible := true
+
+                    ; Kontrol tipine göre dikey boşluğu artır
+                    if (ctrl.Type = "CheckBox") {
+                        yPos += cSpacing
+                    }
+                    else if (ctrl.Type = "Text") {
+                        yPos += 20
+                    }
+                    else if (ctrl.Type = "Edit") {
+                        yPos += 25
+                    }
+                    else if (ctrl.Type = "Slider") {
+                        yPos += this.sliderSpacing
+                    }
                 }
+                yPos += 5
+            } else {
+                ; Kapalıysa tüm kontrolleri gizle
+                for ctrl in controls
+                    ctrl.Visible := false
             }
         }
     }
 
-    ; Debugging için ToolTip ekleyebilirsiniz
-    ; (You can add a ToolTip for debugging)
-    ; tooltip_center("Clicked checkbox: " sectionName " - " funcName " - " checkCtrl.Value)
-}
+    ; ------------------------------------------------------------
+    ; 5) BÖLÜMLERİ AÇ/KAPA (ToggleSection)
+    ; ------------------------------------------------------------
+    ToggleSection(groupName, charName) {
+        this.sectionStates[charName] := !this.sectionStates[charName]
+        local newState := this.sectionStates[charName]
 
-; -------------------------------------------------------------------
-; EVENT HANDLER: HandleShield2InputChange
-; PURPOSE:  Update the AddOrMinus value for shield2 in functionStates
-; -------------------------------------------------------------------
-HandleShield2InputChange(sectionName, inputCtrl) {
-    global functionStates, defaultShield2Value
-    local inputValue := inputCtrl.Value
+        ; İsteğe bağlı: Sadece bir karakterin bölümü açık kalsın diyorsak:
+        if (newState) {
+            this.CollapseAllSectionsExcept(charName)
+        }
 
-    ; Allow empty input or just a minus sign without validation
-    if (inputValue = "" || inputValue = "-") {
-        return
+        ; Tekrar layout uygula
+        this.LayoutAllGroups()
     }
 
-    ; Validate that the input is a number (integer, positive or negative)
-    if !RegExMatch(inputValue, "^-?\d+$") {
-        ; MsgBox("Lütfen shield2 için geçerli bir sayı girin.") ; "Please enter a valid number for shield2."
-        inputCtrl.Value := functionStates[sectionName].Has("Metallic Curtain_AddOrMinus") ? functionStates[sectionName]["Metallic Curtain_AddOrMinus"] : defaultShield2Value
-        return
+    CollapseAllSectionsExcept(exceptCharName) {
+        ; for group, sections in this.groupSections {
+        ;     for sectionArr in sections {
+        ;         local cName := sectionArr[1]
+        ;         if (cName != exceptCharName) {
+        ;             this.sectionStates[cName] := false
+        ;         }
+        ;     }
+        ; }
     }
 
-    ; Update functionStates with the valid input
-    if !functionStates.Has(sectionName)
-        functionStates[sectionName] := Map()
-    functionStates[sectionName]["Metallic Curtain_AddOrMinus"] := inputValue
+    ; ------------------------------------------------------------
+    ; 6) CHECKBOX, EDIT, SLIDER EVENT HANDLER METOTLARI
+    ; ------------------------------------------------------------
+    HandleCheckboxClick(sectionName, funcName, checkCtrl) {
+        ; ToolTip(sectionName . "  " . funcName)
+        if !this.functionStates.Has(sectionName)
+            this.functionStates[sectionName] := Map()
 
-    ; Optional: Display a tooltip for confirmation
-     ; (Optional: Display a tooltip for confirmation)
-    ; tooltip_center("shield2 AddOrMinus değeri güncellendi: " . inputValue, 1000)
-}
+        ; Checkbox işaretli/boş
+        ; ToolTip(funcName . "")
+        this.functionStates[sectionName][funcName] := checkCtrl.Value
 
-; -------------------------------------------------------------------
-; EVENT HANDLER: HandleSliderChange
-; PURPOSE: Slider değerini güncelle (Update slider value)
-; -------------------------------------------------------------------
-HandleSliderChange(sectionName, sliderCtrl) {
-    global functionStates
-    local sliderValue := sliderCtrl.Value
+        ; CheckBox işaretlendiyse diğer karakterlerde aynı isimli fonksiyon işaretini kapat
+        if (checkCtrl.Value) {
+            this.UncheckOtherSections(sectionName, funcName)
+        }
 
-    ; functionStates["Hulk"]["slider"] = değer gibi bir yapı (structure like functionStates["Hulk"]["slider"] = value)
-    if !functionStates.Has(sectionName)
-        functionStates[sectionName] := Map()
+        ; Magneto + Metallic Curtain => Edit kutusunu enable/disable
+        if (sectionName = "Magneto" && funcName = "Metallic Curtain") {
+            this.EnableDisableMagnetoEdit(checkCtrl.Value)
+        }
+    }
 
-    functionStates[sectionName]["slider"] := sliderValue
-
-    ; tooltip_center("Slider changed for " . sectionName . ": " . sliderValue, 1000)
-}
-
-; -------------------------------------------------------------------
-; FUNCTION: UncheckOtherSections
-; PURPOSE: Diğer tüm bölümlerdeki (sectionName hariç) checkbox’ların işaretlerini kaldır
-; (Uncheck the checkboxes in all other sections (except sectionName))
-; -------------------------------------------------------------------
-UncheckOtherSections(currentSectionName, currentFuncName) {
-    global sectionStates, functionStates
-    for key, val in sectionStates.Clone() { ; sectionStates üzerinde değişiklik yapacağımız için Clone() kullanıyoruz (Using Clone() because we will change sectionStates)
-        ; key = "HulkControls" gibi -> karakter adını alalım (key = like "HulkControls" -> let's get the character name)
-        if InStr(key, "Controls") {
-            local charName := StrReplace(key, "Controls")
-            ; Aynı bölüm mü? atla (Is it the same section? skip)
-            if (charName = currentSectionName)
-                continue
-
-            ; O bölümdeki bütün checkbox'ları uncheck yap
-             ; (Uncheck all checkboxes in that section)
-            local controls := sectionStates[key]
-            for ctrl in controls {
-                ; CheckBox türündeki kontrolleri hedefle (Target controls of type CheckBox)
-                if (ctrl.Type = "CheckBox") {
-                    if (ctrl.Text != currentFuncName) { ; Opsiyonel: belirli bir checkbox'u hariç tutmak isterseniz (Optional: if you want to exclude a specific checkbox)
-                        ctrl.Value := false
-                        ; functionStates'ı güncelle (update functionStates)
-                        if (functionStates.Has(charName) && functionStates[charName].Has(ctrl.Text)) {
-                            functionStates[charName][ctrl.Text] := false
+    EnableDisableMagnetoEdit(checked) {
+        for group, sections in this.groupSections {
+            for sectionArr in sections {
+                local cName    := sectionArr[1]
+                local controls := sectionArr[3]
+                if (cName = "Magneto") {
+                    for ctrl in controls {
+                        if (ctrl.Type = "Edit") {
+                            ctrl.Enabled := checked
+                            ; Devre dışı kaldıysa varsayılan değere sıfırla
+                            if (!checked) {
+                                ctrl.Value := this.defaultShield2Value
+                                this.functionStates["Magneto"]["Metallic Curtain_AddOrMinus"] := this.defaultShield2Value
+                            }
                         }
                     }
                 }
             }
         }
     }
-}
 
-; -------------------------------------------------------------------
-; FUNCTION: ToggleSection
-; PURPOSE:  Seçilmiş bölümü aç/kapa ve kontrollerin görünümünü güncelle
-; (Opens/closes selected section and updates the visibility of controls)
-; -------------------------------------------------------------------
-ToggleSection(guiObj, charName) {
-    global sectionStates, defaultShield2Value
+    UncheckOtherSections(currentSectionName, currentFuncName) {
+        for group, sections in this.groupSections {
+            for sectionArr in sections {
+                local cName   := sectionArr[1]
+                local controls := sectionArr[3]
 
-    if !sectionStates.Has(charName)
-        sectionStates[charName] := false
-
-    ; Eğer bölüm kapalı ise, diğer tüm bölümleri kapat
-    ; (If the section is closed, close all other sections)
-    if (!sectionStates[charName]) {
-        CollapseAllSectionsExcept(charName)
-    }
-
-    ; Açık/kapalı durumu tersine çevir (Reverse open/close state)
-    sectionStates[charName] := !sectionStates[charName]
-    local isExpanded := sectionStates[charName]
-
-    ; İlgili kontroller (Related controls)
-    if !sectionStates.Has(charName "Controls") {
-        ; MsgBox("Hata: Bu bölümün kontrol listesi bulunamadı => " charName)
-        ; (MsgBox("Error: The control list for this section was not found => " charName))
-        return
-    }
-    local controls := sectionStates[charName "Controls"]
-
-    ; Kontrolleri göster/gizle (Show/hide controls)
-    for ctrl in controls
-        ctrl.Visible := isExpanded
-
-    ; **Enable shield2 input box based on checkbox state**
-    if (charName = "Magneto") {
-        for ctrl in controls {
-            if (ctrl.Type = "Edit") {
-                ; Find the shield2 checkbox state
-                local shield2Checked := functionStates[charName].Has("Metallic Curtain") ? functionStates[charName]["Metallic Curtain"] : false
-                ctrl.Enabled := shield2Checked
+                if (cName != currentSectionName) {
+                    for ctrl in controls {
+                        if (ctrl.Type = "CheckBox" && ctrl.Text = currentFuncName) {
+                            ctrl.Value := false
+                            if (this.functionStates.Has(cName) && this.functionStates[cName].Has(currentFuncName)) {
+                                this.functionStates[cName][currentFuncName] := false
+                            }
+                        }
+                    }
+                }
             }
         }
     }
 
-    ; GUI boyutunu güncelle (Update GUI size)
-    AdjustGuiSize(guiObj)
-}
+    HandleShield2InputChange(sectionName, inputCtrl) {
+        local inputValue := inputCtrl.Value
 
-; -------------------------------------------------------------------
-; FUNCTION: CollapseAllSectionsExcept
-; PURPOSE:  Belirtilen bölüm hariç tüm bölümleri kapat
-; (Closes all sections except the specified one)
-; -------------------------------------------------------------------
-CollapseAllSectionsExcept(exceptCharName) {
-    global sectionStates, defaultShield2Value
+        ; Boş veya sadece '-' girilmişse geçici olarak dokunma
+        if (inputValue = "" || inputValue = "-") {
+            return
+        }
+        ; RegEx ile sayı olup olmadığını kontrol et (- işareti dahil)
+        if !RegExMatch(inputValue, "^-?\d+$") {
+            ; Geçersiz giriş
+            inputCtrl.Value := this.functionStates[sectionName]["Metallic Curtain_AddOrMinus"]
+            return
+        }
+        this.functionStates[sectionName]["Metallic Curtain_AddOrMinus"] := inputValue
+    }
 
-    for key, val in sectionStates.Clone() { ; sectionStates üzerinde değişiklik yapacağımız için Clone() kullanıyoruz (Using Clone() because we will change sectionStates)
-        if InStr(key, "Controls") || InStr(key, "ToggleBtn")
-            continue
+    HandleSliderChange(sectionName, sliderCtrl) {
+        local sliderValue := sliderCtrl.Value
 
-        if (key != exceptCharName && sectionStates[key]) {
-            sectionStates[key] := false
+        if !this.functionStates.Has(sectionName)
+            this.functionStates[sectionName] := Map()
 
-            ; İlgili kontrolleri gizle (Hide related controls)
-            if (sectionStates.Has(key "Controls")) {
-                local controls := sectionStates[key "Controls"]
-                for ctrl in controls
-                    ctrl.Visible := false
+        this.functionStates[sectionName]["slider"] := sliderValue
+    }
+
+    ; ------------------------------------------------------------
+    ; 7) GUI YÜKSEKLİĞİNİ İHTİYACA GÖRE AYARLA
+    ; ------------------------------------------------------------
+    AdjustGuiSize() {
+        local maxY := 0
+
+        for group, sections in this.groupSections {
+            local tempY := this.yMarginTop
+            for sectionArr in sections {
+                local charName      := sectionArr[1]
+                local cSpacing      := sectionArr[4]
+                local isExpanded    := this.sectionStates[charName]
+
+                ; Toggle buton yüksekliği
+                tempY += (this.buttonHeight + 5)
+
+                if (isExpanded) {
+                    local controls := sectionArr[3]
+                    for ctrl in controls {
+                        if (ctrl.Type = "CheckBox") {
+                            tempY += cSpacing
+                        }
+                        else if (ctrl.Type = "Text") {
+                            tempY += 20
+                        }
+                        else if (ctrl.Type = "Edit") {
+                            tempY += 25
+                        }
+                        else if (ctrl.Type = "Slider") {
+                            tempY += this.sliderSpacing
+                        }
+                    }
+                    tempY += 5
+                }
+            }
+            if (tempY > maxY) {
+                maxY := tempY
             }
         }
-    }
-}
 
-; -------------------------------------------------------------------
-; FUNCTION: AdjustGuiSize
-; PURPOSE:  Bölümlerin y ekseninde dizilimini ve GUI yüksekliğini güncelle
-; (Updates the layout of sections on the y-axis and the GUI height)
-; -------------------------------------------------------------------
-AdjustGuiSize(guiObj) {
-    global xMarginLeft, xMarginRight, yMarginTop, yMarginBottom, sectionW
-    global groupSpacing, buttonSpacing, sectionSpacing, sectionStates, defaultShield2Value
+        local neededHeight := maxY + this.yMarginBottom
 
-    ; Calculate maximum Y position among all groups
-    maxY := yMarginTop
-
-    for group in ["Defence", "Attack", "Healer"] {
-        yVar := "yPos" group
-        if (maxY < %yVar%) {
-            maxY := %yVar%
+        ; Pencereyi gerekliyse dikeyde büyüt
+        if (neededHeight > this.currentGuiHeight) {
+            this.gui.Move(, , , neededHeight)
+            this.currentGuiHeight := neededHeight
         }
     }
-
-    ; Set GUI height based on the maximum Y position
-    guiHeight := maxY + yMarginBottom
-    guiObj.Move(, , , guiHeight)
 }
