@@ -13,13 +13,13 @@ AHI := AutoHotInterception()
 
 ; keyboard := keyboard_(AHI, "HID\VID_1C4F&PID_0002&REV_0330&MI_00")
 
-mouse := mouse_(AHI, "HID\VID_09DA&PID_57EB&REV_0028&MI_01")
+; mouse := mouse_(AHI, "HID\VID_09DA&PID_57EB&REV_0028&MI_01")
 
-keyboard := keyboard_(AHI, "HID\VID_046D&PID_C34B&REV_6200&MI_00")
+; keyboard := keyboard_(AHI, "HID\VID_046D&PID_C34B&REV_6200&MI_00")
 
-; mouse := mouse_(AHI)
+mouse := mouse_(AHI)
 
-; keyboard := keyboard_(AHI)
+keyboard := keyboard_(AHI)
 
 mouse_handle := mouse.handle
 keyboard_handle := keyboard.handle
@@ -293,7 +293,7 @@ class hp{
         hpValue := this.getSliderHp(charName, AddOrMinus)
         ; tooltip_center(charName . AddOrMinus)
         hpValueNumber := myGui.getSliderHpNumber(charName)
-        tooltip_center(charName . ": " . hpValue)
+        ; tooltip_center(charName . ": " . hpValue)
         if (hpValue == "invalid")
         {
             tooltip_center("invalid")
@@ -640,8 +640,8 @@ class thor{
             lightning_realm := isImage_there(this.lightning_realm_x1, this.lightning_realm_y1, this.lightning_realm_x2, this.lightning_realm_y2, this.lightning_realm_, 25)
             if lightning_realm.result
             {
-                send_key("E")
-                ; send_key(var.mouse_middle_code, true)
+                ; send_key("E")
+                send_key(var.mouse_middle_code, true)
             }
         }
     }
@@ -889,7 +889,7 @@ class invisible_woman{
 
     static capture() {
         ; CaptureScreenRegion(this.double_jump_x1, this.double_jump_y1, this.double_jump_x2, this.double_jump_y2, this.double_jump_)
-        CaptureScreenRegion(this.double_jump_2_x1, this.double_jump_2_y1, this.double_jump_2_x2, this.double_jump_2_y2, this.double_jump_2_)
+        ; CaptureScreenRegion(this.double_jump_2_x1, this.double_jump_2_y1, this.double_jump_2_x2, this.double_jump_2_y2, this.double_jump_2_)
     }
 
     static double_jump()
