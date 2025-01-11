@@ -1,6 +1,6 @@
 #Requires AutoHotkey v2.0+
 #SingleInstance Force
-
+; asd
 ; Include necessary libraries
 #Include Lib\AutoHotInterception.ahk
 #Include mouse_keyboard_variables.ahk
