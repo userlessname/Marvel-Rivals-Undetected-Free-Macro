@@ -144,7 +144,10 @@ I hope you enjoy using this macro. If you find it helpful and would like to supp
 
 Every contribution, is greatly appreciated and motivates me to continue creating.
 
-<p style="font-size: 20px;"><strong>mBTC Address:</strong></p><code style="font-size: 25px;">bc1qu5x7rznj7fll7z23n8nl2v3ezz34c5cfc962h0</code>
+<div style="font-size:36px; font-weight:bold;">
+  mBTC Address: bc1qu5x7rznj7fll7z23n8nl2v3ezz34c5cfc962h0
+</div>
+
 
 ---
 
