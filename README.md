@@ -52,7 +52,7 @@ This macro is not a one click team wipe, but it is a huge quality of life improv
      * **(Optional)** Ping: Q
      * **(Optional)** Melee: V
    * (Support for custom key layouts may be added in the future).
-   
+
 **7. Hero-Specific Settings:**
 
    * **Hulk:** Ensure "Hold to activate Incredible Leap" is **ON** (default).
@@ -133,18 +133,19 @@ Stable versions are in the 'Releases Section". Please download from there.
 
 ## Feedback and Support:
 
-If you encounter any issues, have suggestions for improvements, or would like to see support for more heroes or features, please don't hesitate to reply to the relevant post and provide details.
+If you encounter any issues, have suggestions for improvements, or would like to see support for more heroes or features, please don't hesitate to leave new issue. [Issues Section](https://github.com/userlessname/Marvel-Rivals-Undetected-Free-Macro/issues)
+
 
 ---
 
 ## Support the Project:
 
-I hope you enjoy using this macro! If you find it helpful and would like to support further development of this and other undetected macro projects, consider sending a small donation:
+I hope you enjoy using this macro. If you find it helpful and would like to support further development of this and other undetected macro projects, consider sending a small donation:
 
 **mBTC Address:** `bc1qu5x7rznj7fll7z23n8nl2v3ezz34c5cfc962h0`
 
-Every contribution, no matter the size, is greatly appreciated and motivates me to continue creating!
+Every contribution, is greatly appreciated and motivates me to continue creating.
 
 ---
 
-Thank you, and happy gaming!
+Thank you, and happy gaming.
