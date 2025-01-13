@@ -64,7 +64,7 @@ This macro utilizes your mouse and keyboard handles to send inputs and performs 
 **7. Hero-Specific Settings:**
 
    * **Hulk:** Ensure "Hold to activate Incredible Leap" is **ON** (default).
-   * **Captain America:** Ensure "Hold to Raise Shield" is **ON** (default). It is also suggested to turn **OFF** "Hold to Dash."
+   * **Captain America:** Ensure "Hold to Raise Shield" is **OFF** (not default). It is also suggested to turn **OFF** "Hold to Dash."
 
 **8. Initial Program Start:**
 
@@ -93,14 +93,19 @@ This macro utilizes your mouse and keyboard handles to send inputs and performs 
 
 ## Best Use Cases and Supported Heroes:
 
-This macro provides significant improvements for specific heroes and abilities:
+Hulk is the best use case, honestly hulk is unusable without this macro.
+It makes hulk s tier. Healers are good in general term, especially raccoon and mantis. Wolverine becomes good for fast paced action.
+
+---
+
+## Supported Heroes:
 
 **Defense:**
 
-* **Hulk (Indestructible Guard):** Makes Hulk significantly more playable and powerful. The Jump macro does not require an HP check.
-* **Captain America (Living Legend)**
+* **Hulk (Indestructible Guard + Jump):** The Jump macro does not require an HP check. 
+* **Captain America (Living Legend):** 
 * **Venom (Symbiotic Resilience)**
-* **Magneto (Iron Bulwark / Metallic Curtain)**
+* **Magneto (Iron Bulwark + Metallic Curtain)**
 * **Thor (Lightning Realm)**
 
 **Attack:**
@@ -122,8 +127,8 @@ This macro provides significant improvements for specific heroes and abilities:
 * **Invisible Woman (Double Jump (Invisible (Heal)))**
 
 **Image:**
-![Placeholder for a screenshot or GIF demonstrating the macro in action](placeholder_image_url_here.png)
-*(Replace `placeholder_image_url_here.png` with a link to an actual image if available)*
+
+<img src="https://i.imgur.com/UeHQdbH.png" alt="Descriptive Alt Text" width="500"/>
 
 ---
 
