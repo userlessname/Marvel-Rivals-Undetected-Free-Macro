@@ -846,8 +846,8 @@ class captain_america{
             {
                 ; send_key("E")
 
-                AHI.SendMouseButtonEvent(mouse.id, var.mouse_right_code, 1)
-                ; send_key(var.mouse_right_code, true)
+                ; AHI.SendMouseButtonEvent(mouse.id, var.mouse_right_code, 1)
+                send_key(var.mouse_right_code, true)
             }
         }
     }
