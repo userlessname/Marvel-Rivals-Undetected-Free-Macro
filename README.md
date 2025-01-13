@@ -18,7 +18,7 @@ This macro is not a one click team wipe, but it is a huge quality of life improv
 
    * Extract the contents of the downloaded zip file to a folder of your choice.
 
-**2. Install Interception Driver (if needed):**
+**2. Install Interception Driver (if you do not have it):**
 
    * Navigate to the "interception installation" folder.
    * Run `Run As Admin - Install.bat` **as administrator**.
