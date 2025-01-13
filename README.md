@@ -40,6 +40,7 @@ This macro is not a one click team wipe, but it is a huge quality of life improv
    * (Support for other colors may be added in the future).
 
 **6. Keybind Layout**
+
    * For now you have to use my key layout
    * Navigate to **Settings > Keyboard > Combat**.
    * Configure your keybinds as follows:
@@ -51,6 +52,7 @@ This macro is not a one click team wipe, but it is a huge quality of life improv
      * **(Optional)** Ping: Q
      * **(Optional)** Melee: V
    * (Support for custom key layouts may be added in the future).
+   
 **7. Hero-Specific Settings:**
 
    * **Hulk:** Ensure "Hold to activate Incredible Leap" is **ON** (default).
