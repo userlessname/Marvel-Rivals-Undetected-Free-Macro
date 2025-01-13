@@ -131,7 +131,7 @@ Stable versions are in the 'Releases Section". Please download from there.
 
 ---
 
-## Feedback and Support:
+## Feedback:
 
 If you encounter any issues, have suggestions for improvements, or would like to see support for more heroes or features, please don't hesitate to leave new issue. [Issues Section](https://github.com/userlessname/Marvel-Rivals-Undetected-Free-Macro/issues)
 
