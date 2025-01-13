@@ -126,7 +126,7 @@ It makes hulk s tier. Healers are good in general term, especially raccoon and m
 
 ## Download:
 
-Stable versions are in the 'Releases Section". Please download from there.
+Stable versions are in the "Releases Section". Please download from there.
 [Download](https://github.com/userlessname/Marvel-Rivals-Undetected-Free-Macro/releases)
 
 ---
