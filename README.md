@@ -129,9 +129,9 @@ This macro provides significant improvements for specific heroes and abilities:
 
 ## Download:
 
-**Download Version: 0097**
+**Download**
 
-* **Status:** Waiting for approval (the conversion to an EXE might be the reason for the delay).
+* **Status:** Stable versions are in the 'Releases Section". Please download from there.
 
 ---
 
