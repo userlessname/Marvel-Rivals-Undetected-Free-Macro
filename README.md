@@ -129,9 +129,7 @@ This macro provides significant improvements for specific heroes and abilities:
 
 ## Download:
 
-**Download**
-
-* **Status:** Stable versions are in the 'Releases Section". Please download from there.
+Stable versions are in the 'Releases Section". Please download from there.
 
 ---
 
