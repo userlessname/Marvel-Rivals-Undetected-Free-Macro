@@ -144,8 +144,22 @@ I hope you enjoy using this macro. If you find it helpful and would like to supp
 
 Every contribution, is greatly appreciated and motivates me to continue creating.
 
-<p style="font-size: 20px;"><strong>mBTC Address:</strong></p>
-<code style="font-size: 18px;">bc1qu5x7rznj7fll7z23n8nl2v3ezz34c5cfc962h0</code>
+# mBTC Address
+
+<div style="font-size: 1.5em; font-weight: bold;">
+  mBTC Address: <span id="mbtcAddress">bc1qu5x7rznj7fll7z23n8nl2v3ezz34c5cfc962h0</span>
+</div>
+
+<button onclick="copyToClipboard()">Copy Address</button>
+
+<script>
+  function copyToClipboard() {
+    const text = document.getElementById("mbtcAddress").innerText;
+    navigator.clipboard.writeText(text).then(() => {
+      alert("Address copied to clipboard!");
+    });
+  }
+</script>
 
 ---
 
