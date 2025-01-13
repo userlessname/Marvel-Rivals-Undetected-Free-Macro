@@ -1,28 +1,16 @@
-# Marvel Rivals Macro - Enhance Your Gameplay!
+Helloooo,
 
-A quality-of-life improvement macro for Marvel Rivals, built with Autohotkey v2 and AutoHotInterception.
+i just made marvel rivals macro with Autohotkey v2 and AutoHotInterception.
+Did not use any kind of detection from ram, window, game file, security file etc.
+Safe as it gets.
 
-**Disclaimer:** This macro interacts with the game by simulating keyboard and mouse inputs and analyzing the screen visually. It does **not** access game memory, files, or any sensitive data, aiming for the safest possible interaction method. However, use it at your own discretion. The developer is not responsible for any consequences arising from its use.
+Macro gets your mouse and keyboard handle and send inputs throught them and make image search from your screen, just these. Because of these, there are somethings that you have to do manualy, that i will explain in a sec.
 
----
-
-## Key Features:
-
-* **No RAM, Window, or File Detection:** Operates purely through simulated inputs and screen analysis.
-* **Quality of Life Enhancement:** Not a "one-click win," but significantly improves gameplay, especially for certain heroes.
-* **Configurable Minimum HP Threshold:**  Customize when abilities are triggered based on your hero's health.
-* **Hero-Specific Macros:**  Tailored functionality for individual characters.
-* **Easy On/Off Switch:** Toggle the macro with a simple hotkey (`Ctrl + 1` by default).
+This macro is not a one click team wipe, but it is a huge quality of life improvement.
 
 ---
 
-## How It Works:
-
-This macro utilizes your mouse and keyboard handles to send inputs and performs image searches on your screen. Because of this, there are specific setup requirements to ensure it functions correctly.
-
----
-
-## Setup Instructions:
+## How to use it:
 
 **1. Extraction:**
 
@@ -36,7 +24,9 @@ This macro utilizes your mouse and keyboard handles to send inputs and performs 
 
 **3. Screen Resolution:**
 
-   * Your primary monitor's resolution **must be 1920x1080**. (Support for other resolutions may be added in the future).
+   * Your primary monitor's resolution **must be 1920x1080**.
+   * I have not test multiple monitor setups
+   * (Support for other resolutions may be added in the future).
 
 **4. Game Display Mode:**
 
@@ -46,7 +36,8 @@ This macro utilizes your mouse and keyboard handles to send inputs and performs 
 
    * Go to **Settings > Accessibility**.
    * Set **HP Bar Color** to **Blue**.
-   * Setting **Shield HP Bar Color** to **Blue** is also recommended for optimal performance. (Support for other colors may be added in the future).
+   * Setting **Shield HP Bar Color** to **Blue** is also recommended for optimal performance. 
+   * (Support for other colors may be added in the future).
 
 **6. Keybind Layout (Required for now):**
 
