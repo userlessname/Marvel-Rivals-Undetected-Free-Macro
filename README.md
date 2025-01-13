@@ -142,9 +142,10 @@ If you encounter any issues, have suggestions for improvements, or would like to
 
 I hope you enjoy using this macro. If you find it helpful and would like to support further development of this and other undetected macro projects, consider sending a small donation:
 
-**mBTC Address:** `bc1qu5x7rznj7fll7z23n8nl2v3ezz34c5cfc962h0`
-
 Every contribution, is greatly appreciated and motivates me to continue creating.
+
+<p style="font-size: 20px;"><strong>mBTC Address:</strong></p>
+<code style="font-size: 18px;">bc1qu5x7rznj7fll7z23n8nl2v3ezz34c5cfc962h0</code>
 
 ---
 
