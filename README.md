@@ -122,7 +122,7 @@ It makes hulk s tier. Healers are good in general term, especially raccoon and m
 
 **Image:**
 
-<img src="https://imgur.com/a/GmnojcW" alt="Descriptive Alt Text" width="1000"/>
+<img src="https://i.imgur.com/XMLQ6At_d.webp?maxwidth=760&fidelity=grand" alt="Descriptive Alt Text" width="1000"/>
 
 ---
 
