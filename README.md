@@ -56,7 +56,7 @@ This macro is not a one click team wipe, but it is a huge quality of life improv
      * Run `Unblocker.ps1` **as administrator**.
      * **Restart your computer** to ensure the changes are applied.
     
-**8. Additional Macros:**
+**8. Additional Macros(testing):**
 
   * **`Ctrl + 1`** disable additional macros
   * **`Ctrl + 2`** constant mouse left button click
