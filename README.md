@@ -55,8 +55,15 @@ This macro is not a one click team wipe, but it is a huge quality of life improv
      * Navigate to the "Lib" folder.
      * Run `Unblocker.ps1` **as administrator**.
      * **Restart your computer** to ensure the changes are applied.
+    
+**8. Additional Macros:**
 
-**8. Running the Macro:**
+  * **`Ctrl + 1`** disable additional macros
+  * **`Ctrl + 2`** constant mouse left click
+  * **`Ctrl + 3`** constant mouse left + right click
+  * **`Ctrl + 4`** mouse right button hold for Adam Warlock
+
+**9. Running the Macro:**
 
    * After completing all the steps, open the macro program and launch Marvel Rivals.
    * In the macro interface:
