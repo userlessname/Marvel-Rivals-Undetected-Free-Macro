@@ -30,43 +30,25 @@ This macro is not a one click team wipe, but it is a huge quality of life improv
    * I have not test multiple monitor setups
    * (Support for other resolutions may be added in the future).
 
-**4. Game Display Mode:**
-
-   * Set your game to **Borderless Window** mode.
-
-**5. In-Game Accessibility Settings:**
+**4. In-Game Accessibility Settings:**
 
    * Go to **Settings > Accessibility**.
    * Set **HP Bar Color** to **Blue**.
    * Setting **Shield HP Bar Color** to **Blue** is also recommended for optimal performance. 
    * (Support for other colors may be added in the future).
 
-**6. Keybind Layout**
-
-   * For now you have to use my key layout
-   * Navigate to **Settings > Keyboard > Combat**.
-   * Configure your keybinds as follows:
-     * **Secondary Attack:** Right Mouse Button
-     * **Ability 1:** Middle Mouse Button
-     * **Ability 2:** E
-     * **Ability 3:** F
-     * **(Optional)** Ultimate: Left Shift (LShift)
-     * **(Optional)** Ping: Q
-     * **(Optional)** Melee: V
-   * (Support for custom key layouts may be added in the future).
-
-**7. Hero-Specific Settings:**
+**5. Hero-Specific Settings:**
 
    * **Hulk:** Ensure "Hold to activate Incredible Leap" is **ON** (default).
    * **Captain America:** Ensure "Hold to Raise Shield" is **OFF** (not default). It is also suggested to turn **OFF** "Hold to Dash."
 
-**8. Initial Program Start:**
+**6. Initial Program Start:**
 
    * Upon the first launch of the macro script, you need to **move your mouse and press a key** on your keyboard. This allows the script to capture the necessary input handles.
 
-**9. Toggling the Macro:**
+**7. Toggling the Macro:**
 
-   * The macro has an **on/off switch** controlled by pressing **`Ctrl + 1`**.
+   * The macro has an **on/off switch** controlled by pressing **`Alt + 1`**.
    * The default state is "on." Pressing the hotkey will toggle it.
    * You should see an **on-screen notification** in the center of your screen indicating the current state.
    * **If you don't see the notification:** The DLL might be blocked by your system.
@@ -74,7 +56,7 @@ This macro is not a one click team wipe, but it is a huge quality of life improv
      * Run `Unblocker.ps1` **as administrator**.
      * **Restart your computer** to ensure the changes are applied.
 
-**10. Running the Macro:**
+**8. Running the Macro:**
 
    * After completing all the steps, open the macro program and launch Marvel Rivals.
    * In the macro interface:
@@ -96,7 +78,7 @@ It makes hulk s tier. Healers are good in general term, especially raccoon and m
 
 **Defense:**
 
-* **Hulk (Indestructible Guard + Jump):** The Jump macro does not require an HP check. 
+* **Hulk (Indestructible Guard + Jump):**
 * **Captain America (Living Legend):** 
 * **Venom (Symbiotic Resilience)**
 * **Magneto (Iron Bulwark + Metallic Curtain)**
@@ -122,7 +104,7 @@ It makes hulk s tier. Healers are good in general term, especially raccoon and m
 
 **Image:**
 
-<img src="https://i.imgur.com/XMLQ6At_d.webp?maxwidth=760&fidelity=grand" alt="Descriptive Alt Text" width="1000"/>
+<img src="https://i.imgur.com/XMLQ6At.png" alt="Descriptive Alt Text" width="1000"/>
 
 ---
 
