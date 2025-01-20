@@ -59,8 +59,8 @@ This macro is not a one click team wipe, but it is a huge quality of life improv
 **8. Additional Macros:**
 
   * **`Ctrl + 1`** disable additional macros
-  * **`Ctrl + 2`** constant mouse left click
-  * **`Ctrl + 3`** constant mouse left + right click
+  * **`Ctrl + 2`** constant mouse left button click
+  * **`Ctrl + 3`** constant mouse left + right button click
   * **`Ctrl + 4`** mouse right button hold for Adam Warlock
 
 **9. Running the Macro:**
