@@ -11,6 +11,8 @@ Macro gets your mouse and keyboard handle and send inputs throught them and make
 Auto ability trigger at certain hp that you chose, This macro is not a one click team wipe, but it is a huge quality of life improvement.
 
 ---
+## Very important:
+Folder need to be a path with only english in it, if your user has not english word, you can not extract to your desktop
 
 ## How to use it:
 **1. Install Phython:**
