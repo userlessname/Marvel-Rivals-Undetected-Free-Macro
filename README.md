@@ -8,7 +8,7 @@ Safe as it gets.
 
 Macro gets your mouse and keyboard handle and send inputs throught them and make image search from your screen, just these. Because of these, there are somethings that you have to do manualy, that i will explain in a sec.
 
-This macro is not a one click team wipe, but it is a huge quality of life improvement.
+Auto ability trigger at certain hp that you chose, This macro is not a one click team wipe, but it is a huge quality of life improvement.
 
 ---
 
