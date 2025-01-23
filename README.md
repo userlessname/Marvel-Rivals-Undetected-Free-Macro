@@ -12,7 +12,7 @@ Auto ability trigger at certain hp that you chose, This macro is not a one click
 
 ---
 ## Very important:
-Folder need to be a path with only english in it, if your user has not english word, you can not extract to your desktop. extract to c,d etc.
+Folder need to be a path with only english in it, if your user has not english word, you can not extract to your desktop. extract to c, d etc.
 
 ## How to use it:
 **1. Install Phython:**
