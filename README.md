@@ -15,7 +15,7 @@ This macro is not a one click team wipe, but it is a huge quality of life improv
 ## How to use it:
 **1. Install Phython:**
 
-[Here](https://github.com/userlessname/Marvel-Rivals-Undetected-Free-Macro/releases)
+https://www.python.org/ftp/python/3.13.1/python-3.13.1-amd64.exe
 
 **2. Extraction:**
 
