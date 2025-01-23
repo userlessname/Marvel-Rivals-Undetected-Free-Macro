@@ -13,6 +13,11 @@ Auto ability trigger at certain hp that you chose, This macro is not a one click
 ---
 ## Very important:
 Folder need to be a path with only english in it, if your user has not english word, you can not extract to your desktop. extract to c, d etc.
+or
+Press Win + R, type regedit
+HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders
+Find the entry named "Desktop" and double-click it.
+Change your desktop name
 
 ## How to use it:
 **1. Install Phython:**
