@@ -82,8 +82,8 @@ https://www.python.org/ftp/python/3.13.1/python-3.13.1-amd64.exe
 
 ## Best Use Cases and Supported Heroes:
 
-Hulk is the best use case, honestly hulk is unusable without this macro.
-It makes hulk s tier. Healers are good in general term, especially raccoon and mantis. Wolverine becomes good for fast paced action.
+Hulk is the best use case, honestly hulk is unusable without this macro. 
+It makes hulk s tier. Captain america with Suggestion is good. Healers are good in general term, especially raccoon and mantis. Wolverine becomes good for fast paced action.
 
 ---
 
