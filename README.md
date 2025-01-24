@@ -1,4 +1,4 @@
-# Marvel Rivals Undetected/Safe Free Macro 0105
+# Marvel Rivals Undetected/Safe Free Macro 0108
 
 Helloooo,
 
@@ -72,6 +72,12 @@ https://www.python.org/ftp/python/3.13.1/python-3.13.1-amd64.exe
      * **Adjust the slider** to set the **minimum HP percentage** at which the ability will be automatically activated.
      * Ensure the **"Auto send"** option is enabled.
 
+**10. Suggestions:**
+  * Captain america works better with 
+  * ** "Hold to Raise Shield" OFF (not default)
+  * ** "Hold to Dash" OFF (not default)
+  * Hulk works better with
+  * ** "Hold to Activate Incredible Leap" ON (default)
 ---
 
 ## Best Use Cases and Supported Heroes:
