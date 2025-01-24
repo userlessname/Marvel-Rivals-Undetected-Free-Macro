@@ -73,11 +73,11 @@ https://www.python.org/ftp/python/3.13.1/python-3.13.1-amd64.exe
      * Ensure the **"Auto send"** option is enabled.
 
 **10. Suggestions:**
-  * Captain america works better with 
-  * **"Hold to Raise Shield" OFF (not default)
-  * **"Hold to Dash" OFF (not default)
-  * Hulk works better with
-  * **"Hold to Activate Incredible Leap" ON (default)
+   * Captain america works better with 
+   * * "Hold to Raise Shield" OFF (not default)
+   * * "Hold to Dash" OFF (not default)
+   * Hulk works better with
+   * * "Hold to Activate Incredible Leap" ON (default)
 ---
 
 ## Best Use Cases and Supported Heroes:
