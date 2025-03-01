@@ -1,119 +1,47 @@
-# Marvel Rivals Undetected/Safe Free Macro 0109
+Hi, my name is userlessname.
 
-Helloooo,
+Rev 2 is the first interaction with you i will fix bugs if there is any along the way, please do not forget to tell me by replying the post.
 
-i just made marvel rivals macro with Autohotkey v2 and AutoHotInterception.
-Did not use any kind of detection from ram, window, game file, security file etc.
-Safe as it gets.
+This is an auto skill trigger macro rev 2. it is free. i will also share source code in this one. all thing converted into python because of the better image search results. mouse and keyboard send through a driver. rev 2 is much precise.
 
-Macro gets your mouse and keyboard handle and send inputs throught them and make image search from your screen, just these. Because of these, there are somethings that you have to do manualy, that i will explain in a sec.
+How to run:
+1. install driver in "inter installation" folder by running bat file as admin.
 
-Auto ability trigger at certain hp that you chose, This macro is not a one click team wipe, but it is a huge quality of life improvement.
+2. Your screen resolution must be 1920x1080 (i may add others)
 
----
-## Very important:
-Folder need to be a path with only english in it, if your user has not english word, you can not extract to your desktop. extract to c, d etc. If only your desktop folder is not english, Press Win + R, type regedit -> HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders -> Find the entry named "Desktop" and double-click it. -> Change your desktop name
+3. In game Settings>Accessibility>Hp Bar Color must be Blue, making Shield Hp Bar Color Blue also helps. (i may add others)
 
-## How to use it:
-**1. Install Phython:**
+4. For hulk jump to be work "hold to active incrediable leap" must be on (default), also Captain America's Hold to Raise Shield must be off (not default). And also i suggest you to turn off Captain America's "Hold to Dash"
 
-https://www.python.org/ftp/python/3.13.1/python-3.13.1-amd64.exe
+5. expand the hero you want and check the check box you want to activate, slider is for min hp to send skill.
 
-**2. Extraction:**
+Defence:
+Hulk (Indestructible Guard) (Jump (does not need hp check))
+Captain America (Living Legen)
+Venom (Symbiotic Resilience)
+Magneto (Iron Bulwark) (Metallic Curtain)
+Thor (Lightning Realm)
 
-   * Extract the contents of the downloaded zip file to a folder of your choice.
+Attack:
+Scarlet Witch (Mystic Projection)
+Namor (Blessing of The Deep)
+Psylocke (Psychic Stealth)
+Wolverine (Undying Animal)
+Mister Fantastic (Reflexive Rubber)
 
-**3. Install Interception Driver (if you do not have it):**
+Healer:
+Loki (Deception)
+Mantis (Natural Anger)
+Rocket Raccoon (Repair Mode)
+Luna Snow (Ice Arts)
+Adam Warlock (Avatar Life Stream)
+Jeff The Land Shark (Hide and Seek)
+Invisible Woman (Double Jump(invisible(heal)))
 
-   * Navigate to the "interception installation" folder.
-   * Run `Run As Admin - Install.bat` **as administrator**.
-   * **Restart your computer** after installation.
-
-**4. Screen Resolution:**
-
-   * Your primary monitor's resolution **must be 1920x1080**.
-   * I have not test multiple monitor setups
-   * (Support for other resolutions may be added in the future).
-
-**5. In-Game Accessibility Settings:**
-
-   * Go to **Settings > Accessibility**.
-   * Set **HP Bar Color** to **Blue**.
-   * Setting **Shield HP Bar Color** to **Blue** is also recommended for optimal performance. 
-   * (Support for other colors may be added in the future).
-
-**6. Initial Program Start:**
-
-   * Upon the first launch of the macro script, you need to **move your mouse and press a key** on your keyboard. This allows the script to capture the necessary input handles.
-
-**7. Toggling the Macro:**
-
-   * The macro has an **on/off switch** controlled by pressing **`Alt + 1`**.
-   * The default state is "on." Pressing the hotkey will toggle it.
-   * You should see an **on-screen notification** in the center of your screen indicating the current state.
-   * **If you don't see the notification:** The DLL might be blocked by your system.
-     * Navigate to the "Lib" folder.
-     * Run `Unblocker.ps1` **as administrator**.
-     * **Restart your computer** to ensure the changes are applied.
-    
-**8. Additional Macros(testing):**
-
-  * **`Ctrl + 1`** disable additional macros
-  * **`Ctrl + 2`** constant mouse left button click
-  * **`Ctrl + 3`** constant mouse left + right button click
-  * **`Ctrl + 4`** mouse right button hold for Adam Warlock
-
-**9. Running the Macro:**
-
-   * After completing all the steps, open the macro program and launch Marvel Rivals.
-   * In the macro interface:
-     * **Select the hero** you want to use the macro with.
-     * **Choose the specific ability** for the macro.
-     * **Adjust the slider** to set the **minimum HP percentage** at which the ability will be automatically activated.
-     * Ensure the **"Auto send"** option is enabled.
-
-**10. Suggestions:**
-   * Captain america works better with 
-     * "Hold to Raise Shield" OFF (not default)
-     * "Hold to Dash" OFF (not default)
-   * Hulk works better with
-     * "Hold to Activate Incredible Leap" ON (default)
----
-
-## Best Use Cases and Supported Heroes:
-
-Hulk is the best use case, honestly hulk is unusable without this macro. 
-It makes hulk s tier. Captain america with suggestions is good. Healers are good in general term, especially raccoon and mantis. Wolverine becomes good for fast paced action.
-
----
-
-## Supported Heroes:
-
-**Defense:**
-
-* **Hulk (Indestructible Guard + Jump):**
-* **Captain America (Living Legend):** 
-* **Venom (Symbiotic Resilience)**
-* **Magneto (Iron Bulwark + Metallic Curtain)**
-* **Thor (Lightning Realm)**
-
-**Attack:**
-
-* **Scarlet Witch (Mystic Projection)**
-* **Namor (Blessing of The Deep)**
-* **Psylocke (Psychic Stealth)**
-* **Wolverine (Undying Animal)**
-* **Mister Fantastic (Reflexive Rubber)**
-
-**Healer:**
-
-* **Loki (Deception)**
-* **Mantis (Natural Anger)**
-* **Rocket Raccoon (Repair Mode)**
-* **Luna Snow (Ice Arts)**
-* **Adam Warlock (Avatar Life Stream)**
-* **Jeff The Land Shark (Hide and Seek)**
-* **Invisible Woman (Double Jump (Invisible (Heal)))**
+How it is works:
+1. It will automatically get mouse and keyboard device handles to use only in program at the start of the program.
+2. It will automatically get your key layout.
+3. It will automatically and constantly makes screen search for things to send skill when life is low.
 
 **Image:**
 
