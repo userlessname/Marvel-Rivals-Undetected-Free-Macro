@@ -15,21 +15,21 @@ How to run:
 
 5. expand the hero you want and check the check box you want to activate, slider is for min hp to send skill.
 
-Defence:
+# Defence:
 Hulk (Indestructible Guard) (Jump (does not need hp check))
 Captain America (Living Legen)
 Venom (Symbiotic Resilience)
 Magneto (Iron Bulwark) (Metallic Curtain)
 Thor (Lightning Realm)
 
-Attack:
+# Attack:
 Scarlet Witch (Mystic Projection)
 Namor (Blessing of The Deep)
 Psylocke (Psychic Stealth)
 Wolverine (Undying Animal)
 Mister Fantastic (Reflexive Rubber)
 
-Healer:
+# Healer:
 Loki (Deception)
 Mantis (Natural Anger)
 Rocket Raccoon (Repair Mode)
