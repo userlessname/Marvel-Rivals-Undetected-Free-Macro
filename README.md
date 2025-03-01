@@ -15,28 +15,31 @@ How to run:
 
 5. expand the hero you want and check the check box you want to activate, slider is for min hp to send skill.
 
-# Defence:
-Hulk (Indestructible Guard) (Jump (does not need hp check))
-Captain America (Living Legen)
-Venom (Symbiotic Resilience)
-Magneto (Iron Bulwark) (Metallic Curtain)
-Thor (Lightning Realm)
+**Defense:**
 
-# Attack:
-Scarlet Witch (Mystic Projection)
-Namor (Blessing of The Deep)
-Psylocke (Psychic Stealth)
-Wolverine (Undying Animal)
-Mister Fantastic (Reflexive Rubber)
+* **Hulk (Indestructible Guard + Jump):**
+* **Captain America (Living Legend):** 
+* **Venom (Symbiotic Resilience)**
+* **Magneto (Iron Bulwark + Metallic Curtain)**
+* **Thor (Lightning Realm)**
 
-# Healer:
--Loki (Deception)
--Mantis (Natural Anger)
--Rocket Raccoon (Repair Mode)
-Luna Snow (Ice Arts)
-Adam Warlock (Avatar Life Stream)
-Jeff The Land Shark (Hide and Seek)
-Invisible Woman (Double Jump(invisible(heal)))
+**Attack:**
+
+* **Scarlet Witch (Mystic Projection)**
+* **Namor (Blessing of The Deep)**
+* **Psylocke (Psychic Stealth)**
+* **Wolverine (Undying Animal)**
+* **Mister Fantastic (Reflexive Rubber)**
+
+**Healer:**
+
+* **Loki (Deception)**
+* **Mantis (Natural Anger)**
+* **Rocket Raccoon (Repair Mode)**
+* **Luna Snow (Ice Arts)**
+* **Adam Warlock (Avatar Life Stream)**
+* **Jeff The Land Shark (Hide and Seek)**
+* **Invisible Woman (Double Jump (Invisible (Heal)))**
 
 How it is works:
 1. It will automatically get mouse and keyboard device handles to use only in program at the start of the program.
