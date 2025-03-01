@@ -48,7 +48,7 @@ How it is works:
 
 **Image:**
 
-<img src="[https://imgur.com/naTC1kB](https://imgur.com/naTC1kB)" alt="Descriptive Alt Text" width="1000"/>
+<img src="https://i.imgur.com/naTC1kB.png" alt="Descriptive Alt Text" width="1000"/>
 
 ---
 
