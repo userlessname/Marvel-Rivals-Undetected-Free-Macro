@@ -31,6 +31,7 @@ Mister Fantastic (Reflexive Rubber)
 
 # Healer:
 Loki (Deception)
+
 Mantis (Natural Anger)
 Rocket Raccoon (Repair Mode)
 Luna Snow (Ice Arts)
