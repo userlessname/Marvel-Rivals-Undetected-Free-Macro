@@ -1,6 +1,6 @@
 ### 0200
 
-Rev 2 is the first interaction with you i will fix bugs if there is any along the way, please do not forget to tell me.
+Rev 2's first interaction with you, i will fix bugs if there is any along the way, please do not forget to tell me.
 
 This is an auto skill trigger macro rev 2. it is free. i will also share source code in this one. all thing converted into python because of the better image search results. mouse and keyboard send through a driver. rev 2 is much precise.
 
