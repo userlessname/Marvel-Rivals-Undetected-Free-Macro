@@ -30,10 +30,9 @@ Wolverine (Undying Animal)
 Mister Fantastic (Reflexive Rubber)
 
 # Healer:
-Loki (Deception)
-
-Mantis (Natural Anger)
-Rocket Raccoon (Repair Mode)
+-Loki (Deception)
+-Mantis (Natural Anger)
+-Rocket Raccoon (Repair Mode)
 Luna Snow (Ice Arts)
 Adam Warlock (Avatar Life Stream)
 Jeff The Land Shark (Hide and Seek)
