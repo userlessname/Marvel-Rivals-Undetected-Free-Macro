@@ -64,7 +64,7 @@ If you encounter any issues, have suggestions for improvements, or would like to
 ---
 ## Free Support:
 
-Start or watch to repo
+Star or watch to repo
 
 ## Paid Support:
 
