@@ -69,12 +69,6 @@ If you encounter any issues, have suggestions for improvements, or would like to
 
 Star or watch to repo
 
-## Paid Support:
-
-
-#### mBTC Address:
-### bc1qu5x7rznj7fll7z23n8nl2v3ezz34c5cfc962h0
-
 
 
 
